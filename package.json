@@ -1,0 +1,15 @@
+{
+    "name": "matcha",
+    "title": "meet[her]",
+    "version": "0.1.0",
+    "homepage": "http://localhost:8080/index.html",
+    "author": "Thgiraud",
+    "license": {
+        "type": "MIT",
+        "url": "https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wickedpool/matcha.git"
+    }
+}
