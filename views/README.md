@@ -1,1 +1,1 @@
-Ce dir est ici pour stocker des codes html a afficher grace a Express.js
+Ce dir est ici pour stocker des templates html via EJS.
