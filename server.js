@@ -9,7 +9,7 @@ var	index = require('./routes/index.html');
 app.use(express.static('public'));
 
 var server = http.createServer(function(req, res) {
-    fs.readFile('./index.html', 'utf-8', function(error, content) {
+    fs.readFile('./route/index.html', 'utf-8', function(error, content) {
 		if (error) {
 			throw error;
 		}
