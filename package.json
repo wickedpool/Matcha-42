@@ -2,6 +2,11 @@
     "name": "matcha",
     "title": "meet[her]",
     "version": "0.1.0",
+	"dependencies": {
+		"express": "~4.15.3",
+		"ejs": "~2.5.7",
+		"socket.io": "~2.0.3"
+	},
     "homepage": "http://localhost:8080/index.html",
     "author": "Thgiraud",
     "license": {
