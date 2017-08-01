@@ -1,5 +1,6 @@
-let express = require('express'),
-	app = express();
+let express = require('express')
+
+let app = express()
 	//connexion = require('./config/database);
 
 app.set('view engine', 'ejs');
@@ -7,7 +8,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-	reponse.render('pages/index');
+	res.render('pages/index', {test: 'Salut'})
 })
 
 /*
@@ -23,4 +24,4 @@ app.get('/', (req, res) => {
 *
 */
 
-server.app.listen(8080);
+app.listen(8080)
