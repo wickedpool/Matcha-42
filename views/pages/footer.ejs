@@ -1,0 +1,26 @@
+    <!-- jQuery -->
+    <script src="../js/jquery.js"></script>
+
+	<!-- semantic -->
+    <script src="../semantic/semantic.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+	$(document).ready(function(){
+  $('.right.menu.open').on("click",function(e){
+    e.preventDefault();
+    $('.ui.vertical.menu').toggle();
+  });
+    
+  $('.ui.dropdown').dropdown();
+});
+    </script>
+
+</body>
+
+</html>

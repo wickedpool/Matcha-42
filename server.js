@@ -3,12 +3,12 @@ let express = require('express')
 let app = express()
 	//connexion = require('./config/database);
 
-app.set('view engine', 'ejs');
+app.set('view engine', 'ejs')
 
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 app.get('/', (req, res) => {
-	res.render('pages/index', {test: 'Salut'})
+	res.render('pages/index')
 })
 
 /*
@@ -23,5 +23,9 @@ app.get('/', (req, res) => {
 }); 
 *
 */
+
+app.use(function (req, res, next) {
+  res.status(404).send("Sorry cannot find that !")
+})
 
 app.listen(8080)
