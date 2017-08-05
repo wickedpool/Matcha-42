@@ -3,9 +3,12 @@ let express = require('express')
 let app = express()
 	//connexion = require('./config/database);
 
+let login = require('./routes/login')
+
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
+app.use('/login', login)
 
 app.get('/', (req, res) => {
 	res.render('pages/index')
