@@ -3,12 +3,14 @@ let express = require('express')
 let app = express()
 	//connexion = require('./config/database);
 
-//let login = require('./routes/login')
+let login = require('./routes/login')
+
+var port = process.env.PORT || 8080;
 
 app.set('view engine', 'ejs')
 
 app.use(express.static('public'))
-//app.use('/login', login)
+app.use('/login', login)
 
 app.get('/', (req, res) => {
 	res.render('pages/index')
@@ -31,4 +33,5 @@ app.use(function (req, res, next) {
   res.status(404).send("Sorry cannot find that !")
 })
 
-app.listen(8080)
+app.listen(port)
+console.log('Server started! At http://localhost:' + port);
