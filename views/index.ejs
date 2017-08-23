@@ -22,7 +22,7 @@ Start Matcha
 <div class="container-fluid">
 <br/>
 <br/>
-<form method='POST' action='/routes/login'>
+<form method='POST' action='/login'>
 <div class="container">
 <label><b>Login</b></label>
 <input type="text" placeholder="Enter login" name="login" required>
@@ -37,8 +37,17 @@ Start Matcha
 <input type="text" placeholder="Enter Email" name="email" required>
 <br>
 <label><b>Age</b></label>
-<input type="text" placeholder="Enter your age" name="age" required>
+	<input type="text" placeholder="Enter your age" name="age" required>
 <br>
+<label><b>Gender</b></label>
+	<input type="radio" name="gender" value="male" checked> Male<br>
+    <input type="radio" name="gender" value="female"> Female<br>
+	<input type="radio" name="gender" value="other"> Other
+<br>
+<label><b>City</b></label>
+	<input type="text" placeholder="Enter your city" name="age" required>
+<br>
+
 <label><b>Password</b></label>
 <input type="password" placeholder="Enter Password" name="pwd" required>
 <br>

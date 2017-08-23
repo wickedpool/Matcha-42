@@ -1,4 +1,3 @@
-
 //connection
 
 var mysql      = require('mysql');
