@@ -1,7 +1,7 @@
-var express = require('express');
-	connect = require(../config/database.js);
-	app = express.Router();
+var express = require('express'),
+	router = express.Router();
 
-app.post('/', function(req, res) {
+router.post('/', function(req, res) {
 	res.send("ON EST AL !");
 });
+module.exports = router;
