@@ -1,5 +1,12 @@
 /* HEADER */
 
+html { 
+	margin:0;
+	padding:0;
+	background: url('../background.jpg') no-repeat center fixed; 
+	background-size: cover; /* version standardisée */
+}
+
 .ui.grid.main{
 	margin-top: 70px;
 }
@@ -27,7 +34,7 @@
   		margin-top: 70px;
 	}
 
-        .ui.grid { margin: 0 !important; }
+    .ui.grid { margin: 0 !important; }
 	.ui.vertical.menu.navbar{
 		margin-top: 0px !important;
 	}
