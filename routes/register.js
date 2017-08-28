@@ -2,7 +2,17 @@ var express = require('express'),
 	router = express.Router();
 
 router.post('/', function(req, res) {
-	if (req.body.login && req.body.name && req.body.lastname && req.body.email && req.body.age && req.body.gender)
-	res.send("ON EST AL !");
+	var login = req.body.login,
+		name = req.body.name,
+		lastname = req.body.lastname,
+		email = req.body.email,
+		age = req.body.age,
+		gender = req.body.gender,
+		city = req.body.city,
+		description = req.body.decription;
+	if (login && name && lastname && email && age && gender && city)
+		res.send("ON EST LA !");
+	else
+		res.send("Veuillez remplir tous les champs");
 });
 module.exports = router;
