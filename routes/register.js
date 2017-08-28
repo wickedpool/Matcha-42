@@ -14,9 +14,9 @@ router.post('/', function(req, res) {
 		name = req.body.name,
 		lastname = req.body.lastname,
 		email = req.body.email,
-		age = req.body.age,
 		gender = req.body.gender,
 		city = req.body.city;
+		age = req.body.age,
 	if (login && name && lastname && email && age && gender && city) {
 		res.send("ON EST LA !");
 	}

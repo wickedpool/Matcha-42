@@ -1,10 +1,16 @@
-/* HEADER */
+/* body */
 
-html { 
+body { 
 	margin:0;
 	padding:0;
-	background: url('../background.jpg') no-repeat center fixed; 
+	background: url(../background.jpg) no-repeat center fixed; 
 	background-size: cover; /* version standardisée */
+}
+
+/* header*/
+
+.ui.inverted.fixed.menu.navbar.page.grid {
+	background: #223b48;
 }
 
 .ui.grid.main{
@@ -46,4 +52,24 @@ html {
 	display: none;
 }
 
-/* HEADER */
+/* registration form */
+
+.ui.raised.very.padded.text.container.segment {
+	margin-top: 10%;
+	opacity: 0.8;
+	color: white;
+	background: #192a33;
+}
+
+.ui.form.segment {
+	color: white;
+	background: #192a33;
+}
+
+.ui.form .field > label {
+	color: white;
+}
+
+.ui.checkbox label, .ui.checkbox + label {
+	color: white;
+}
