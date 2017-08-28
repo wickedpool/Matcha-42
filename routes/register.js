@@ -16,11 +16,15 @@ router.post('/', function(req, res) {
 		email = req.body.email,
 		gender = req.body.gender,
 		city = req.body.city;
-		age = req.body.age,
+		age = req.body.age;
 	if (login && name && lastname && email && age && gender && city) {
+		connect.query("SELECT * FROM user WHERE login = ? OR email = ?", [login, email], (err, rows, result) => {
+	if (err) console.log(err)
+	else
+})
 		res.send("ON EST LA !");
 	}
 	else
-		res.send("Veuillez remplir tous les champs");
+		res.redirect("/?err=Veuillez remplir tous les champs");
 });
 module.exports = router;
