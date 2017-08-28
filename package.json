@@ -16,10 +16,11 @@
     "mysql": "~2.14.1",
     "nodemon": "^1.11.0",
     "serve-favicon": "~2.4.2",
-    "socket.io": "~2.0.3"
+    "socket.io": "~2.0.3",
+	"express-session": "~5.3.0"
   },
   "homepage": "http://localhost:8080/index.html",
-  "author": "Thgiraud",
+  "author": "thgiraud",
   "repository": {
     "type": "git",
     "url": "https://github.com/wickedpool/matcha.git"
