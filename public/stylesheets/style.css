@@ -73,3 +73,9 @@ body {
 .ui.checkbox label, .ui.checkbox + label {
 	color: white;
 }
+
+/* ui negative message */
+
+.ui.negative.message {
+	margin-top: 5%;
+}

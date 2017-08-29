@@ -1,11 +1,16 @@
 <% include header %>
 
+
+
 <div id="wrapper">
 
 <!-- Page Content -->
 <div id="page-content-wrapper">
 <div class="container-fluid">
+
+<!-- FORM -->
 <div class="ui raised very padded text container segment">
+<div class="field example">
 <form class="ui form segment" method="post" action="/register">
 <h4>Tell Us About Yourself</h4>
 <div class="two fields">
@@ -69,12 +74,15 @@
 </div>
 </div>
 </div>
+</div>
 <!-- /#page-content-wrapper -->
 </div>
 <!-- wrapper -->
 
+
 <script>
-$('form.ui.form.segment')
+/*
+$('.field.example form')
 .form({
 fields: {
 name: {
@@ -95,12 +103,12 @@ prompt : 'Please select a gender'
 }
 ]
 },
-username: {
-identifier: 'username',
+lastname: {
+identifier: 'lastname',
 			rules: [
 			{
 type   : 'empty',
-		 prompt : 'Please enter a username'
+		 prompt : 'Please enter your last name'
 			}
 			]
 		  },
@@ -144,7 +152,7 @@ type   : 'minLength[6]',
 			}
 			]
 		  },
-2ndpassword: {
+repswd: {
 identifier: 'repswd',
 			rules: [
 			{
@@ -157,7 +165,6 @@ type   : 'minLength[6]',
 			}
 			]
 			 },
-
 terms: {
 identifier: 'terms',
 			rules: [
@@ -168,8 +175,8 @@ type   : 'checked',
 			]
 	   }
 }
-})
-;
+});
+*/
 </script>
 
 <% include footer %>

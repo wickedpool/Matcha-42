@@ -3,13 +3,7 @@ var 	express = require('express'),
 		session = require('express-session'),
 		router = express.Router();
 
-router.get('/', function(req, res) {
-	res.render('register', {
-		title: 'Inscription',
-		user: req.session.user
-	})
-})
-
+require('../middlewares/flash');
 
 router.post('/', function(req, res) {
 	var	login = req.body.login,
@@ -21,9 +15,10 @@ router.post('/', function(req, res) {
 		age = req.body.age;
 	if (login && name && lastname && email && age && gender && city) {
 		connect.query("SELECT * FROM user WHERE login = ? OR email = ?", [login, email], (err, rows, result) => {
-		if (err) console.log(err)
+		if (err) console.log(err);
 		else if (login.length > 60 || email.length > 150 || lastname.length > 60 || name.length > 60) {
-			res.redirect('/?err=oklm');
+			req.flash('error', 'too long dude !');
+			res.redirect('/');
 		} else {
 			res.send("ON EST LA !");
 		}
