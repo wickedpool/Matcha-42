@@ -20,9 +20,6 @@
 		<!-- mine -->
 		<link href="../stylesheets/style.css" rel="stylesheet">
 
-		<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-1.4.4.min.js"></script>
-
-		<script src="../javascripts/jquery.validate.min.js"></script>
 
 	</head>
 
@@ -78,6 +75,7 @@
 		<div class="ui main container">
 			<% if (locals.flash && locals.flash.error) { %>
 			<div class="ui negative message">
+				<h3><i class="warning sign icon"></i>Une erreur est survenue :</h3>
 				<%= flash.error %>
 			</div>	
 			<% } %>

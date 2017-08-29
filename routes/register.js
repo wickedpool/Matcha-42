@@ -17,15 +17,17 @@ router.post('/', function(req, res) {
 		connect.query("SELECT * FROM user WHERE login = ? OR email = ?", [login, email], (err, rows, result) => {
 		if (err) console.log(err);
 		else if (login.length > 60 || email.length > 150 || lastname.length > 60 || name.length > 60) {
-			req.flash('error', 'too long dude !');
+			req.flash('error', 'trop long !');
 			res.redirect('/');
 		} else {
 			res.send("ON EST LA !");
 		}
 		})
 	}
-	else
-		res.redirect("/");
+	else {
+		req.flash('error', 'Veuillez remplir tous les champs.');
+		res.redirect('/');
+	}
 });
 
 module.exports = router;
