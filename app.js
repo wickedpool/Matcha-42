@@ -18,7 +18,7 @@ app.set('view engine', 'ejs');
 
 // uncomment after placing your favicon in /public app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -29,12 +29,21 @@ app.use(session({
 	resave: false,
 	saveUninitialized: true,
 	cookie: { secure: false }
-}))
-app.use(require('./middlewares/flash'));
+}));
+
+app.use(function (req, res, next) {
+	if (req.session) {
+		if (req.session.error) {
+			console.log(req.session.error);
+			res.locals.error = req.session.error
+			req.session.error = undefined
+		}
+	}
+	next()
+});
 
 app.use('/', index);
 app.use('/register', register);
-
 
 // catch 404 and forward to error handler
 //
@@ -47,7 +56,7 @@ app.use(function(req, res, next) {
 // error handler
 //
 app.use(function(err, req, res, next) {
-	console.log(err);
+	//console.log(err);
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
