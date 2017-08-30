@@ -1,27 +1,25 @@
-    <!-- jQuery -->
-    <script src="../javascripts/jquery.js"></script>
+		<!-- jQuery -->
+		<script src="../javascripts/jquery.js"></script>
 
-	<!-- semantic -->
-    <script src="../semantic/semantic.min.js"></script>
+		<!-- semantic -->
+		<script src="../semantic/semantic.min.js"></script>
 
-    <!-- Menu Toggle Script -->
+		<script>
+			$("#menu-toggle").click(function(e) {
+				e.preventDefault();
+				$("#wrapper").toggleClass("toggled");
+			});
 
-    <script>
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#wrapper").toggleClass("toggled");
-    });
+			$(document).ready(function(){
+				$('.right.menu.open').on("click",function(e){
+					e.preventDefault();
+					$('.ui.vertical.menu').toggle();
+				});
 
-	$(document).ready(function(){
-  $('.right.menu.open').on("click",function(e){
-    e.preventDefault();
-    $('.ui.vertical.menu').toggle();
-  });
-    
-  $('.ui.dropdown').dropdown();
-});
-    </script>
+				$('.ui.dropdown').dropdown();
+			});
+		</script>
 
-</body>
+	</body>
 
 </html>
