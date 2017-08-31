@@ -1,6 +1,6 @@
 var express = require('express')
 var path = require('path')
-var favicon = require('serve-favicon')
+//var favicon = require('serve-favicon')
 var logger = require('morgan');
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
@@ -35,9 +35,6 @@ app.use(function (req, res, next) {
 		if (req.session.error) {
 			res.locals.error = req.session.error
 			req.session.error = undefined
-		} else if (req.session.success) {
-			res.locals.success = req.session.success
-			req.session.success = undefined
 		}
 	}
 	next()

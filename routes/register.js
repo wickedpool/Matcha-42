@@ -27,7 +27,7 @@ router.post('/', function(req, res) {
 			req.session.error = 'Les mots de passe ne sont pas identiques!'
 			res.redirect('/')
 		} else {
-			res.send("COUCOUUUU");
+			
 		}
 		})
 	} else {
