@@ -1,6 +1,6 @@
 var express = require('express')
 var path = require('path')
-//var favicon = require('serve-favicon')
+var favicon = require('serve-favicon')
 var logger = require('morgan');
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
@@ -24,7 +24,7 @@ app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
 app.use(session({
-	secret: "Zhowh>fpui901884384jdow<kkd",
+	secret: "i901884384jdowkkd",
 	resave: false,
 	saveUninitialized: true,
 	cookie: { secure: false }
@@ -33,9 +33,11 @@ app.use(session({
 app.use(function (req, res, next) {
 	if (req.session) {
 		if (req.session.error) {
-			console.log(req.session.error)
 			res.locals.error = req.session.error
 			req.session.error = undefined
+		} else if (req.session.success) {
+			res.locals.success = req.session.success
+			req.session.success = undefined
 		}
 	}
 	next()
@@ -56,9 +58,10 @@ app.use(function(req, res, next) {
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message
-  res.locals.error = req.app.get('env') === 'development' ? err : {}
+  res.locals.err = req.app.get('env') === 'development' ? err : {}
 
   // render the error page
+	console.log(err)
   res.status(err.status || 500)
   res.render('error')
 })
