@@ -55,7 +55,6 @@ body {
 /* registration form */
 
 .ui.raised.very.padded.text.container.segment {
-	margin-top: 10%;
 	opacity: 0.8;
 	color: white;
 	background: #192a33;
@@ -78,4 +77,49 @@ body {
 
 .ui.negative.message {
 	margin-top: 5%;
+}
+
+/* Steps for multi form  */
+
+div.steps {
+	margin: 8%;
+}
+
+.in, .out {
+    -webkit-animation-timing-function: ease-in-out;
+    -webkit-animation-duration: 500ms !important;
+}
+
+.font{
+    font-family: 'Lobster', cursive;
+    font-weight:300;
+    font-size:40px;
+}
+#social{
+    display: none;
+    padding:20px;
+}
+
+#personal{
+    display:none;
+    padding:20px;
+}
+
+#account{
+    display: block;
+    padding:20px;
+}
+
+.text.container{
+    width:57%;
+}
+
+#logo{
+    border:2px solid white;
+    border-radius: 10px;
+    color:white;
+    padding:15px;
+}
+#logo:hover{
+    box-shadow: 0px 0px 5px 5px white;
 }

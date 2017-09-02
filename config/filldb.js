@@ -43,5 +43,6 @@ connection.query('CREATE TABLE IF NOT EXISTS user (id INT(9) UNSIGNED AUTO_INCRE
 	}
 });
 
+
 //End of connection
 connection.end();
