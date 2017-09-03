@@ -3,6 +3,7 @@ var 	express = require('express'),
 		session = require('express-session'),
 		regex = require('regex-email'),
 		bcrypt = require('bcrypt'),
+		iplocation = require('iplocation'),
 		router = express.Router()
 
 const	salt = 10
@@ -26,7 +27,10 @@ router.post('/', function(req, res) {
 	var	hash = bcrypt.hashSync(pswd, salt)
 	if (login && name && lastname && email && age && gender && city && pswd && repswd) {
 		connect.query("SELECT * FROM user WHERE login = ? OR email = ?", [login, email], (err, rows, result) => {
-			if (err) console.log(err)
+			if (err) {
+				req.session.error = 'Une erreur est survenue.'
+				res.redirect('/')
+			}
 		if (login.length > 60 || email.length > 150 || lastname.length > 60 || name.length > 60) {
 			req.session.error = 'Champ trop long!'
 			res.redirect('/')
@@ -37,10 +41,10 @@ router.post('/', function(req, res) {
 			req.session.error = 'Le login ne peux comporter que des caracteres de A a Z et des chiffres!'
 			res.redirect('/')
 		} else if (name.search(RegexBoth) || lastname.search(RegexBoth)) {
-			req.session.error = 'Votre nom ne peux pas contenir de caracteres autres que l\'alphabet meme si vous avez un nom compose!'
+			req.session.error = 'Votre nom ne peux pas contenir de caracteres autres que l\'alphabet meme si vous avez un nom composé!'
 			res.redirect('/')
 		} else if (city.search(RegexBoth)) {
-			req.session.error = 'Le nom de votre ville ne peux pas comporter d\'accents, ou autre caractere special!'
+			req.session.error = 'Le nom de votre ville ne peux pas comporter d\'accents, ou autre caractere speciaux!'
 			res.redirect('/')
 		} else if (pswd != repswd) {
 			req.session.error = 'Les mots de passe ne sont pas identiques!'
@@ -55,20 +59,48 @@ router.post('/', function(req, res) {
 			req.session.error = 'Le mot de passe doit contenir au moins une majuscule!'
 			res.redirect('/')
 		} else if (pswd.search(RegexMore) == -1) {
-			req.session.error = 'Le mot de passe ne peux pas contenir de caracteres speciaux mise a part #, $, %, ^, &, *, ,, et . '
+			req.session.error = 'Le mot de passe ne peux pas contenir de caracteres spéciaux mise a part #, $, %, ^, &, *, ,, et . '
 			res.redirect('/')
 		} else if (pswd.length < 6) {
 			req.session.error = 'Le mot de passe doit contenir au minimum 6 caracteres!'
 			res.redirect('/')
-		} else if (!age.search(RegexDate)) {
+		} else if (age.search(RegexDate)) {
 			req.session.error = 'Le format de la date n\'est pas valide!'
 			res.redirect('/')
 		} else if (name.length < 3 || lastname.length < 3) {
 			req.session.error = 'Le nom fait moins de 2 caracteres'
 			res.redirect('/')
+		} else if (rows[0] && rows['email']) {
+			req.session.error = 'L\'email est déjà utilisé'
+			res.redirect('/')
+		} else if (rows[0] && rows['login']) {
+			req.session.error = "Le nom d'utilisateur est déjà utilisé"
 		} else {
-			connection.query("INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, age = ?, sexe = ?, city = ?", [login, name, lastname, email, hash, gender, city], (err, rows, result) => {
-				if (err) console.log(err)
+			connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?', [login, name, lastname, email, hash, new Date(), age, gender, city], (err, rows, result) => {
+				if (err) {
+					throw (err)
+					console.log(result)
+					req.session.error = 'Une erreur est survenue. :)'
+					res.redirect('/')
+				} else {
+					iplocation(req.ip, function(error, res) {
+						if (res && res['city']) {
+							connect.query('UPDATE user SET latitude = ?, longitude = ? WHERE login = ?', res['latitude'], res['longitude'], [login], (err) => {
+								if (err) {
+									req.session.error = 'Une erreur est survenue!'
+									res.redirect('/')
+								}
+							})
+						} else {
+                            connect.query('UPDATE user SET city = "Paris", lat = 48.8965, lon = 2.3182 WHERE login = ?', [login], (err) => {
+								if (err) {
+									req.session.error = 'Une erreur est survenue!'
+									res.redirect('/')
+								}
+							})
+						}
+					})
+				}
 			})
 		}
 		})
