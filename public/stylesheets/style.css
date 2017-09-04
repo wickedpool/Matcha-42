@@ -55,6 +55,7 @@ body {
 /* registration form */
 
 .ui.raised.very.padded.text.container.segment {
+	margin-top: 10%;
 	opacity: 0.8;
 	color: white;
 	background: #192a33;
@@ -111,7 +112,7 @@ div.steps {
 }
 
 .text.container{
-    width:57%;
+    width:68%;
 }
 
 #logo{

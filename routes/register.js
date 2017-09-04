@@ -78,29 +78,28 @@ router.post('/', function(req, res) {
 		} else {
 			connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?', [login, name, lastname, email, hash, new Date(), age, gender, city], (err, rows, result) => {
 				if (err) {
-					throw (err)
-					console.log(result)
+					console.log(err)
 					req.session.error = 'Une erreur est survenue. :)'
 					res.redirect('/')
 				} else {
 					iplocation(req.ip, function(error, res) {
 						if (res && res['city']) {
 							connect.query('UPDATE user SET latitude = ?, longitude = ? WHERE login = ?', res['latitude'], res['longitude'], [login], (err) => {
-								if (err) {
-									req.session.error = 'Une erreur est survenue!'
-									res.redirect('/')
-								}
+								if (err) console.log(err)
 							})
 						} else {
-                            connect.query('UPDATE user SET city = "Paris", lat = 48.8965, lon = 2.3182 WHERE login = ?', [login], (err) => {
-								if (err) {
-									req.session.error = 'Une erreur est survenue!'
-									res.redirect('/')
-								}
+                            connect.query('UPDATE user SET city = "Paris", latitude = 48.8965, longitude = 2.3182 WHERE login = ?', [login], (err) => {
+								if (err) console.log(err)
 							})
 						}
 					})
 				}
+				console.log('================================================')
+				console.log('=                                              =')
+				console.log('=             IT\'s WORKING MOTHA               =')
+				console.log('=                     FUCK                     =')
+				console.log('================================================')
+				res.redirect('/?step=2')
 			})
 		}
 		})
