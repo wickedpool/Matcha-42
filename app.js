@@ -5,8 +5,6 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var session = require('express-session')
-var toastr = require('toastr')
-var jquery = require('jquery')
 
 var index = require('./routes/index')
 var register = require('./routes/register')
