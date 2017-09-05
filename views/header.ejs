@@ -12,12 +12,16 @@
 		<!-- mine -->
 		<link href="../stylesheets/style.css" rel="stylesheet">
 		<!-- TOASTR -->
-		<link href="../stylesheets/toastr.min.css" rel="stylesheet"/>
-		<script src="../javascripts/toastr.min.js"></script>
+		<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
 
 	</head>
 
 	<body>
+
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js">
+		</script>
+		<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.2/js/toastr.min.js">
+		</script>
 
 		<nav class="navbar">
 			<a class="navbar-brand" href="#">
@@ -71,9 +75,19 @@
 		<div class="ui main container">
 			<% if (locals && locals.error) { %>
 				<script>
-				// toastr.info(<%= locals.error %>)
- 				 toastr.info('Are you the 6 fingered man')
-
+					toastr.error('<%= locals.error %>')
+				</script>
+			<% } else if (locals && locals.success) { %>
+				<script>
+					toastr.success('<%= locals.success %>')
+				</script>
+			<% } else if (locals && locals.warning) { %>
+				<script>
+					toastr.warning('<%= locals.warning %>')
+				</script>
+			<% } else if (locals && locals.info) { %>
+				<script>
+					toastr.info('<%= locals.info %>')
 				</script>
 			<% } %>
 		</div>	

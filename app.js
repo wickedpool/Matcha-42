@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser')
 var bodyParser = require('body-parser')
 var session = require('express-session')
 
-var index = require('./routes/index')
-var register = require('./routes/register')
+var index = require('./routes/index'),
+	register = require('./routes/register'),
+	profil = require('./routes/profil')
 
 var app = express()
 
@@ -35,6 +36,15 @@ app.use(function (req, res, next) {
 		if (req.session.error) {
 			res.locals.error = req.session.error
 			req.session.error = undefined
+		} else if (req.session.success) {
+			res.locals.success = req.session.success
+			req.session.success = undefined
+		} else if (req.session.warning) {
+			res.locals.warning = req.session.warning
+			req.session.warning = undefined
+		} else if (req.session.info) {
+			res.locals.info = req.session.info
+			req.session.info = undefined
 		}
 	}
 	next()
@@ -43,6 +53,7 @@ app.use(function (req, res, next) {
 //Routes
 app.use('/', index)
 app.use('/register', register)
+app.use('/profil', profil)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

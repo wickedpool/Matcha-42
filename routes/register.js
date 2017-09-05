@@ -4,6 +4,7 @@ var 	express = require('express'),
 		regex = require('regex-email'),
 		bcrypt = require('bcrypt'),
 		iplocation = require('iplocation'),
+		parse = require('parse').parse,
 		router = express.Router()
 
 const	salt = 10
@@ -94,12 +95,10 @@ router.post('/', function(req, res) {
 						}
 					})
 				}
-				console.log('================================================')
-				console.log('=                                              =')
-				console.log('=             IT\'s WORKING MOTHA               =')
-				console.log('=                     FUCK                     =')
-				console.log('================================================')
-				res.redirect('/?step=2')
+				var s = 'Le formulaire a bien été rempli, bienvenue sur Matcha '
+				s += login
+				req.session.success = s
+				res.redirect('/profil')
 			})
 		}
 		})
