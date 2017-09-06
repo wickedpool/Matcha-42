@@ -19,7 +19,7 @@ router.post('/', function(req, res) {
 	if (login && pswd) {
 		connect.query("SELECT * FROM user WHERE login = ? LIMIT 1", [login], (err, rows, result) => {
 			if (err) {
-				req.session.error = 'Une erreur est survenue.'
+				req.session.error = 'Le nom d\'utilisateur ou le mot de passe n\'exise pas!'
 				res.redirect('/profil')
 			} else if (!pswd.search(/\d/)) {
 				req.session.error = 'Le mot de passe doit contenir au moins un chiffre!'
@@ -38,6 +38,18 @@ router.post('/', function(req, res) {
 				res.redirect('/profil')
 			} else if (pswd.length > 15) {
 				req.session.error = 'Le mot de passe doit contenir au maximum 15 caracteres!'
+				res.redirect('/profil')
+			} else if (rows[0]) {
+				var hash = bcrypt.hashSync(pswd, salt)
+				if (hash == rows[0].passwd) {
+					req.session.login = login.toLowerCase()
+					
+				} else {
+					req.session.error = 'Le nom d\'utilisateur ou le mot de passe n\'exise pas.'
+					res.redirect('/profil')
+				}
+			} else {
+				req.session.error = 'Le nom d\'utilisateur ou le mot de passe n\'exise pas.'
 				res.redirect('/profil')
 			}
 		})
