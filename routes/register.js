@@ -71,10 +71,13 @@ router.post('/', function(req, res) {
 		} else if (name.length < 3 || lastname.length < 3) {
 			req.session.error = 'Le nom fait moins de 2 caracteres'
 			res.redirect('/')
-		} else if (rows[0] && rows['email']) {
+		} else if (pswd.length > 15) {
+			req.session.error = 'Le mot de passe doit contenir au maximum 15 caracteres!'
+			res.redirect('/')
+		} else if (rows[0] && rows[0]['email']) {
 			req.session.error = 'L\'email est déjà utilisé'
 			res.redirect('/')
-		} else if (rows[0] && rows['login']) {
+		} else if (rows[0] && rows[0]['login']) {
 			req.session.error = "Le nom d'utilisateur est déjà utilisé"
 		} else {
 			connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?', [login, name, lastname, email, hash, new Date(), age, gender, city], (err, rows, result) => {
