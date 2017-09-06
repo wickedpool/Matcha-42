@@ -43,7 +43,14 @@ router.post('/', function(req, res) {
 				var hash = bcrypt.hashSync(pswd, salt)
 				if (hash == rows[0].passwd) {
 					req.session.login = login.toLowerCase()
-					
+					if (rows[0].mainpic) {
+						req.session.ok = true
+					}
+					else
+						req.session.ok = false
+					if (rows[0].sexe)
+						req.session.sexe = rows[0].sexe
+						
 				} else {
 					req.session.error = 'Le nom d\'utilisateur ou le mot de passe n\'exise pas.'
 					res.redirect('/profil')
