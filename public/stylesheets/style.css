@@ -88,3 +88,17 @@ img.logoform {
 	margin-right: auto;
 	display: block
 }
+
+/* profil */
+
+div.ui.segment {
+	margin-top: 10%;
+	opacity: 0.9;
+	margin-right: 5%;
+	margin-left: 5%;
+	background: none;
+}
+
+h2.ui.right.floated.header {
+	color: white;
+}
