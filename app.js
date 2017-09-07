@@ -8,6 +8,7 @@ var session = require('express-session')
 
 var index = require('./routes/index'),
 	register = require('./routes/register'),
+	login = require('./routes/login'),
 	profil = require('./routes/profil')
 
 var app = express()
@@ -36,13 +37,16 @@ app.use(function (req, res, next) {
 		if (req.session.error) {
 			res.locals.error = req.session.error
 			req.session.error = undefined
-		} else if (req.session.success) {
+		}
+		if (req.session.success) {
 			res.locals.success = req.session.success
 			req.session.success = undefined
-		} else if (req.session.warning) {
+		}
+		if (req.session.warning) {
 			res.locals.warning = req.session.warning
 			req.session.warning = undefined
-		} else if (req.session.info) {
+		}
+		if (req.session.info) {
 			res.locals.info = req.session.info
 			req.session.info = undefined
 		}
@@ -53,6 +57,7 @@ app.use(function (req, res, next) {
 //Routes
 app.use('/', index)
 app.use('/register', register)
+app.use('/login', login)
 app.use('/profil', profil)
 
 // catch 404 and forward to error handler

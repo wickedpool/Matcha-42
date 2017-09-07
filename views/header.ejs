@@ -30,7 +30,7 @@
 		<div class="ui grid">
 			<div class="computer tablet only row">
 				<div class="ui inverted fixed menu navbar page grid">
-					<a href="#" class="brand item">
+					<a href="/" class="brand item">
 						<img src="images/matcha1.png" alt="">
 					</a>
 					<a href="#" class="item">About</a>
@@ -77,15 +77,18 @@
 				<script>
 					toastr.error('<%= locals.error %>')
 				</script>
-			<% } else if (locals && locals.success) { %>
+			<% } %>
+			<% if (locals && locals.success) { %>
 				<script>
 					toastr.success('<%= locals.success %>')
 				</script>
-			<% } else if (locals && locals.warning) { %>
+			<% } %>
+			<% if (locals && locals.warning) { %>
 				<script>
 					toastr.warning('<%= locals.warning %>')
 				</script>
-			<% } else if (locals && locals.info) { %>
+			<% } %>
+			<% if (locals && locals.info) { %>
 				<script>
 					toastr.info('<%= locals.info %>')
 				</script>

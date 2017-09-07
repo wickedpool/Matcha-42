@@ -101,7 +101,7 @@ router.post('/', function(req, res) {
 				var s = 'Le formulaire a bien été rempli, bienvenue sur Matcha '
 				s += login
 				req.session.success = s
-				res.redirect('/profil')
+				res.redirect('/login')
 			})
 		}
 		})
