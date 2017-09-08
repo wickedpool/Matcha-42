@@ -1,7 +1,49 @@
 <% include header %> 
 
-<div class="ui grid">
-	
+<div class="ui grid edit">
+	<div class="tag">
+		<a class="ui label">
+			Tag
+			<i class="delete icon"></i>
+		</a>	
+	</div>	
+	<br>
+	<form class="ui form" action="/user_edit" method="POST">
+		<div class="ui form">
+			<input type="submit" class="ui submit button" value="Submit"</div>
+		</div>	
+	</form>
 </div>
 
-<% include footer %> 
+
+
+<div id="wrapper">
+<div id="page-content-wrapper">
+<div class="container-fluid">
+
+<!-- FORM -->
+<div class="ui raised very padded text container segment">
+	<h4>Edit your profile</h4>
+	<hr>
+	<div class="field example">
+		<img src="images/matcha1.png" class="logoform">
+		<form class="ui form segment" method="post" action="/user_edit">
+			<div class="field">
+				<label>Entrez vos hobbies ou interets - Maximum 5</label>
+				<input type="text" name="tag" placeholder="exemple: musculation">
+			</div>
+			<div class="ui center">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+            </div>
+		</form>
+		<hr>
+	</div>
+</div>
+
+</div>
+</div>
+<!-- /#page-content-wrapper -->
+</div>
+
+
+<% include footer %>

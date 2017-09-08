@@ -119,3 +119,11 @@ div.left.ui.small.images {
 div.ui.teal.empty.circular.label {
 	background: green
 }
+
+/* edit */
+
+div.ui.grid.edit {
+	margin-top: 10%;
+	margin-left: 10%;
+	margin-right: 10%;
+}

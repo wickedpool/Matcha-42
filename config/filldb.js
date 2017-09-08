@@ -43,6 +43,13 @@ connection.query('CREATE TABLE IF NOT EXISTS user (id INT(9) UNSIGNED AUTO_INCRE
 	}
 });
 
+connection.query('CREATE TABLE IF NOT EXISTS tag (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, tag VARCHAR(100))', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table tag created');
+	}
+});
+
 
 //End of connection
 connection.end();
