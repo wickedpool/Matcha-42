@@ -2,11 +2,61 @@
 
 <div class="ui segment">
 	<h2 class="ui right floated header">Votre profil</h2>
-	<br>
-	<hr>
-	<br>
-	<img class="ui medium circular image" src="images/profil/steve.jpg">
-	<p></p>
+<br>
+<hr>
+<br>
+<div class="ui grid">
+  <div class="doubling three column large screen only row">
+    <div class="column">
+		<div class="ui segment">
+			<img class="ui medium circular image" src="images/profil/steve.jpg">
+		</div>
+	</div>
+    <div class="column">
+		<div class="ui segment">
+			<div class="ui teal empty circular label"></div> En Ligne
+			<hr class="ui">
+			<div class="ui large header" style="color:white"> <%= locals.name + ' ' + locals.lastname %> </div>
+			<% if (locals.sexe == "male") { %>
+				<p>
+					Homme, <%= locals.age %>ans
+				</p>
+			<% } else if (locals.sexe == "female") { %>
+				<p>
+					Femme, <%= locals.age %>ans
+				</p>
+			<% } %>
+			</div>
+		</div>
+		<div class="column">
+			<div class="ui segment none">
+			</div>
+		</div>
+		<br>
+		<hr style="width:100%">
+		<div class="ui container">
+			<div class="left ui small images">
+				<img class="profil" src="images/profil/steve.jpg">
+				<img class="profil" src="images/profil/steve.jpg">
+			</div>
+		</div>
+		<div class="ui container">
+			<div class="left ui small images">
+				<img class="profil" src="images/profil/steve.jpg">
+				<img class="profil" src="images/profil/steve.jpg">
+			</div>
+		</div>
+		<div class="inline field">
+			<h3>
+				<a href="/user_edit">Editez votre profil</a>
+				<% if (!locals.ok) { %>
+					<div class="ui left pointing red basic label" style="background:none">
+						 Vous devez editer votre profil pour pouvoir continuer!
+					</div>
+				<% } %>
+			</h3>
+		</div>
+	</div>
 </div>
 
 <% include footer %>

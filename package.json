@@ -7,6 +7,7 @@
     "start": "nodemon ./bin/www"
   },
   "dependencies": {
+    "age-calculator": "^1.0.0",
     "bcrypt": "^1.0.3",
     "body-parser": "~1.17.1",
     "cookie-parser": "~1.4.3",
@@ -14,6 +15,7 @@
     "ejs": "~2.5.7",
     "express": "~4.15.2",
     "express-session": "^1.15.5",
+    "http": "0.0.0",
     "iplocation": "^5.0.0",
     "morgan": "~1.8.1",
     "mysql": "~2.14.1",
@@ -21,7 +23,7 @@
     "parse": "^1.10.0",
     "regex-email": "^1.0.2",
     "serve-favicon": "^2.4.3",
-    "socket.io": "~2.0.3",
+    "socket.io": "^2.0.3",
     "update": "^0.7.4"
   },
   "homepage": "http://localhost:8080/index.html",

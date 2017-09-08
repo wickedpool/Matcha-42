@@ -1,17 +1,18 @@
-var express = require('express')
-var path = require('path')
+var		express = require('express'),
+ 		path = require('path'),
 //var favicon = require('serve-favicon')
-var logger = require('morgan');
-var cookieParser = require('cookie-parser')
-var bodyParser = require('body-parser')
-var session = require('express-session')
+ 		logger = require('morgan'),
+		cookieParser = require('cookie-parser'),
+	 	bodyParser = require('body-parser'),
+	 	session = require('express-session')
 
 var index = require('./routes/index'),
 	register = require('./routes/register'),
 	login = require('./routes/login'),
 	profil = require('./routes/profil'),
 	logout = require('./routes/logout'),
-	home = require('./routes/home')
+	home = require('./routes/home'),
+	edit = require('./routes/user_edit')
 
 var app = express()
 
@@ -57,7 +58,12 @@ app.use(function (req, res, next) {
 })
 
 app.use(function(req, res, next) {
-  res.locals.login = req.session.login
+	res.locals.login = req.session.login
+	res.locals.sexe = req.session.sexe
+	res.locals.lastname = req.session.lastname
+	res.locals.name = req.session.name
+	res.locals.age = req.session.age
+	res.locals.ok = req.session.ok
   next()
 })
 
@@ -66,6 +72,7 @@ app.use('/', index)
 app.use('/register', register)
 app.use('/login', login)
 app.use('/profil', profil)
+app.use('/user_edit', edit)
 app.use('/home', home)
 app.use('/logout', logout)
 
@@ -89,4 +96,3 @@ app.use(function(err, req, res, next) {
 })
 
 module.exports = app
-

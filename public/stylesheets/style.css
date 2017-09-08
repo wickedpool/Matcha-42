@@ -97,8 +97,25 @@ div.ui.segment {
 	margin-right: 5%;
 	margin-left: 5%;
 	background: none;
+	color: white
 }
 
 h2.ui.right.floated.header {
 	color: white;
+}
+
+div.ui.segment {
+	color:white;
+}
+
+div.ui.segment.none {
+	display: none;
+}
+
+div.left.ui.small.images {
+	margin: 0em 1.75rem 0rem;
+}
+
+div.ui.teal.empty.circular.label {
+	background: green
 }

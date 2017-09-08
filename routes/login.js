@@ -1,8 +1,11 @@
 var express = require('express'),
 	connect = require('../config/database.js'),
 	session = require('express-session'),
+	ageCalculator = require('age-calculator'),
 	bcrypt = require('bcrypt'),
 	router = express.Router()
+
+let {AgeFromDateString, AgeFromDate} = require('age-calculator')
 
 router.get('/', function(req, res, next) {
 	res.render('login', { title: 'Express' })
@@ -38,6 +41,10 @@ router.post('/', function(req, res) {
 				req.session.error = 'Le mot de passe doit contenir au maximum 15 caracteres!'
 				res.redirect('/login')
 			} else if (rows[0]) {
+				connect.query("UPDATE user SET online = 1 WHERE login = ?", [login], (err) => {
+					if (err) console.log(err)
+				})
+				let ageFromString = new AgeFromDateString(rows[0].age).age
                 if (bcrypt.compareSync(pswd, rows[0].passwd)) { 
 					req.session.login = login.toLowerCase()
 					if (rows[0].mainpic) {
@@ -47,12 +54,14 @@ router.post('/', function(req, res) {
 						req.session.name = rows[0].name
 						req.session.sexe = rows[0].sexe
 						req.session.mainpic = rows[0].mainpic
+						req.session.age = ageFromString
 						req.session.success = "Vous êtes maintenant connecté"
 						res.redirect('/home')
 					} else {
 						req.session.ok = false
 						req.session.sexe = rows[0].sexe
 						req.session.lastname = rows[0].lastname
+						req.session.age = ageFromString
 						req.session.name = rows[0].name
 						req.session.info = 'Veuillez remplir vos informations personnelles.'
 						req.session.success = "Vous êtes maintenant connecté"
