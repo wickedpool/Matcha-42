@@ -1,12 +1,6 @@
 <% include header %> 
 
 <div class="ui grid edit">
-	<div class="tag">
-		<a class="ui label">
-			Tag
-			<i class="delete icon"></i>
-		</a>	
-	</div>	
 	<br>
 	<form class="ui form" action="/user_edit" method="POST">
 		<div class="ui form">
@@ -14,8 +8,6 @@
 		</div>	
 	</form>
 </div>
-
-
 
 <div id="wrapper">
 <div id="page-content-wrapper">
@@ -25,11 +17,28 @@
 <div class="ui raised very padded text container segment">
 	<h4>Edit your profile</h4>
 	<hr>
+	<div class="tag">
+		<a class="ui label">
+		TA MERE 
+			<i class="delete icon"></i>
+		</a>
+	</div>
 	<div class="field example">
 		<img src="images/matcha1.png" class="logoform">
 		<form class="ui form segment" method="post" action="/user_edit">
+			<% if (locals && locals.tag) { %>
+				<% for (var i=0; i<locals.count; i++) { %>
+					<div class="tag">
+						<a class="ui label">
+							<%= locals.tag.i %>
+							TA MERE 
+							<i class="delete icon"></i>
+						</a>
+					</div>
+				<% } %>
+			<% } %>
 			<div class="field">
-				<label>Entrez vos hobbies ou interets - Maximum 5</label>
+				<label>Entrez vos hobbies ou interets</label>
 				<input type="text" name="tag" placeholder="exemple: musculation">
 			</div>
 			<div class="ui center">
