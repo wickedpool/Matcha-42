@@ -17,26 +17,24 @@
 <div class="ui raised very padded text container segment">
 	<h4>Edit your profile</h4>
 	<hr>
-	<div class="tag">
-		<a class="ui label">
-		TA MERE 
-			<i class="delete icon"></i>
-		</a>
-	</div>
 	<div class="field example">
 		<img src="images/matcha1.png" class="logoform">
 		<form class="ui form segment" method="post" action="/user_edit">
-			<% if (locals && locals.tag) { %>
-				<% for (var i=0; i<locals.count; i++) { %>
-					<div class="tag">
-						<a class="ui label">
-							<%= locals.tag.i %>
-							TA MERE 
+			<div class="tag">
+			<% if (tag) { %>
+				<% var a = 0 %>
+				<% tag.forEach(function(element) { %>
+					<% var tag = element["tag"] %>
+					<a class="ui label">
+						<%= element["tag"] %>
+						<a class="deltag" href="#" data-type=<%= tag %>>
 							<i class="delete icon"></i>
 						</a>
-					</div>
-				<% } %>
+					</a>
+				<% }) %>
 			<% } %>
+			</div>
+			<br>
 			<div class="field">
 				<label>Entrez vos hobbies ou interets</label>
 				<input type="text" name="tag" placeholder="exemple: musculation">
@@ -56,3 +54,9 @@
 
 
 <% include footer %>
+
+<script>
+	$('.deltag').on('click', function() {
+		alert("walah le coran je vais bientot te supprimer fdp!")
+	});	
+</script>

@@ -6,12 +6,9 @@ var express = require('express'),
 router.get('/', function(req, res, next) {
 	connect.query("SELECT tag FROM tag WHERE login = ?", [req.session.login], (err, rows, result) => {
 		if (err) console.log(err)
-		for (var i = 0; i < rows.length; i++) {
-			req.session.i = rows[i].tag
-		}
-		req.session.count = i;
-	})
+		res.locals.tag = rows
 	res.render('user_edit', { title: 'Express' })
+	})
 })
 
 router.post('/', function(req, res, next) {

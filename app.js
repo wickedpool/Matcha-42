@@ -67,18 +67,6 @@ app.use(function(req, res, next) {
   next()
 })
 
-app.use(function(req, res, next) {
-	if (req.session.count) {
-		for (var i = 0; i < req.session.count; i++) {
-			res.locals.tag.i = req.session.i
-			req.session.i = undefined
-		}
-		res.locals.count = req.session.count
-		req.session.count = undefined
-	}
-  next()
-})
-
 
 //Routes
 app.use('/', index)
