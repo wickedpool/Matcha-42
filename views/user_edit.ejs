@@ -22,12 +22,11 @@
 		<form class="ui form segment" method="post" action="/user_edit">
 			<div class="tag">
 			<% if (tag) { %>
-				<% var a = 0 %>
 				<% tag.forEach(function(element) { %>
 					<% var tag = element["tag"] %>
 					<a class="ui label">
 						<%= element["tag"] %>
-						<a class="deltag" href="#" data-type=<%= tag %>>
+						<a class="tagdel" href="user_edit/del/tag=<%= tag %>">
 							<i class="delete icon"></i>
 						</a>
 					</a>
@@ -54,9 +53,3 @@
 
 
 <% include footer %>
-
-<script>
-	$('.deltag').on('click', function() {
-		alert("walah le coran je vais bientot te supprimer fdp!")
-	});	
-</script>
