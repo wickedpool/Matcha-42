@@ -18,7 +18,8 @@ router.post('/', function(req, res) {
 		city = req.body.city,
 		age = req.body.age,
 		pswd = req.body.pswd,
-		repswd = req.body.repswd
+		repswd = req.body.repswd,
+		interest = req.body.interest
 	var RegexMin = /[a-z]/,
 		RegexMax = /[A-Z]/,
 		RegexBoth = /[a-zA-Z]/,
@@ -80,7 +81,7 @@ router.post('/', function(req, res) {
 		} else if (rows[0] && rows[0]['login']) {
 			req.session.error = "Le nom d'utilisateur est déjà utilisé"
 		} else {
-			connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?', [login, name, lastname, email, hash, new Date(), age, gender, city], (err, rows, result) => {
+			connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?, interest = ?', [login, name, lastname, email, hash, new Date(), age, gender, city, interest], (err, rows, result) => {
 				if (err) {
 					console.log(err)
 					req.session.error = 'Une erreur est survenue. :)'

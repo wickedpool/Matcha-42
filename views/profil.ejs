@@ -26,8 +26,32 @@
 					Femme, <%= locals.age %>ans
 				</p>
 			<% } %>
+			<% if (locals.interest == "male") { %>
+				<p> Interresse par: &nbsp; Hommes <p>
+			<% } else if (locals.interest == "female") { %>
+				<p> Interresse par: &nbsp; Femmes <p>
+			<% } else if (locals.interest == "both") { %>
+				<p> Interresse par: &nbsp; Les deux <p>
+			<% } %>
 			</div>
+			<div class="ui segment">
+				<div class="tag">
+						<% if (tag) { %>
+								<% tag.forEach(function(element) { %>
+									<% var tag = element["tag"] %>
+									<a class="ui label">
+											<%= element["tag"] %>
+											<a class="tagdel" href="user_edit/tag/<%= tag %>">
+											<i class="delete icon"></i>
+										</a>
+									</a>
+								<% }) %>
+						<% } %>
+				</div>
 		</div>
+		</div>
+		</div>
+				
 		<div class="column">
 			<div class="ui segment none">
 			</div>
@@ -46,8 +70,7 @@
 				<img class="profil" src="images/profil/steve.jpg">
 			</div>
 		</div>
-		<div class="inline field">
-			<h3>
+									<h3>
 				<a href="/user_edit">Editez votre profil</a>
 				<% if (!locals.ok) { %>
 					<div class="ui left pointing red basic label" style="background:none">
@@ -56,7 +79,6 @@
 				<% } %>
 			</h3>
 		</div>
-	</div>
 </div>
 
 <% include footer %>

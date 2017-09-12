@@ -1,14 +1,5 @@
 <% include header %> 
 
-<div class="ui grid edit">
-	<br>
-	<form class="ui form" action="/user_edit" method="POST">
-		<div class="ui form">
-			<input type="submit" class="ui submit button" value="Submit"</div>
-		</div>	
-	</form>
-</div>
-
 <div id="wrapper">
 <div id="page-content-wrapper">
 <div class="container-fluid">
@@ -26,7 +17,7 @@
 					<% var tag = element["tag"] %>
 					<a class="ui label">
 						<%= element["tag"] %>
-						<a class="tagdel" href="user_edit?tag=<%= tag %>">
+						<a class="tagdel" href="user_edit/tag/<%= tag %>">
 							<i class="delete icon"></i>
 						</a>
 					</a>
@@ -43,6 +34,17 @@
             </div>
 		</form>
 		<hr>
+		<form class="ui form segment" method="post" action="/user_edit/des">
+		<div class="ui form">
+			<div class="field">
+				<label>Votre description</label>
+				<textarea name="descri" placeholder="Votre description,
+	exemple: Thomas XXans region parisienne, recherche femme licorne mature et sans complexe"><% if (locals.descri) locals.descri %></textarea>
+            </div>
+			<div class="ui center">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+            </div>
+		</div>
 	</div>
 </div>
 

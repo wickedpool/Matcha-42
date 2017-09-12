@@ -4,7 +4,16 @@ var express = require('express'),
 	router = express.Router()
 
 router.get('/', function(req, res, next) {
-	res.render('profil', { title: 'Express' })
+	if (req.session && req.session.login) {
+		connect.query("SELECT tag FROM tag WHERE login = ?", [req.session.login], (err, rows, result) => {
+			if (err) console.log(err)
+			res.locals.tag = rows
+			res.render('profil', { title: 'Express' })
+		})
+	} else {
+		req.session.error = 'Vous devez vous connecter pour acceder a cette page.'
+		res.redirect('/')
+	}
 })
 
 module.exports = router

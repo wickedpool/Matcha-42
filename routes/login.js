@@ -55,6 +55,7 @@ router.post('/', function(req, res) {
 						req.session.sexe = rows[0].sexe
 						req.session.mainpic = rows[0].mainpic
 						req.session.age = ageFromString
+						req.session.interest = rows[0].interest
 						req.session.success = "Vous êtes maintenant connecté"
 						res.redirect('/home')
 					} else {
@@ -63,6 +64,7 @@ router.post('/', function(req, res) {
 						req.session.lastname = rows[0].lastname
 						req.session.age = ageFromString
 						req.session.name = rows[0].name
+						req.session.interest = rows[0].interest
 						req.session.info = 'Veuillez remplir vos informations personnelles.'
 						req.session.success = "Vous êtes maintenant connecté"
 						res.redirect('/profil')
