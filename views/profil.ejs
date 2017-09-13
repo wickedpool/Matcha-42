@@ -33,52 +33,60 @@
 			<% } else if (locals.interest == "both") { %>
 				<p> Interresse par: &nbsp; Les deux <p>
 			<% } %>
-			</div>
-			<div class="ui segment">
-				<div class="tag">
-						<% if (tag) { %>
-								<% tag.forEach(function(element) { %>
-									<% var tag = element["tag"] %>
-									<a class="ui label">
-											<%= element["tag"] %>
-											<a class="tagdel" href="user_edit/tag/<%= tag %>">
-											<i class="delete icon"></i>
-										</a>
-									</a>
-								<% }) %>
-						<% } %>
+		</div>
+	</div>
+	<div class="column">
+	<form class="ui form segment" style="background:none" method="post" action="/profil">
+		<div class="tag">
+			<% if (tag) { %>
+				<% tag.forEach(function(element) { %>
+					<% var tag = element["tag"] %>
+					<a class="ui label">
+						<%= element["tag"] %>
+						<a class="tagdel" href="user_edit/tag/<%= tag %>">
+						<i class="delete icon"></i>
+						</a>
+					</a>
+				<% }) %>
+			<% } %>
+		</div>
+		<div class="field">
+			<label>Entrez vos hobbies ou interets</label>
+			<input type="text" name="tag" placeholder="exemple: musculation">
+		</div>
+		<div class="ui center">
+			<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+		</div>
+	</form>
+	</div>
+	</div>
+	<% if (!locals.ok) { %>
+		<div class="ui top pointing red basic label" style="background:none;height:2%">
+			 Vous devez editer votre profil pour pouvoir continuer!
+		</div>
+	<% } %>
+
+			
+	<br>
+	<hr style="width:100%">
+	<div class="ui segment textarea">
+	<div class="column">
+	<form class="ui form segment" method="post" action="/profil/des">
+		<div class="ui form">
+			<div class="field">
+				<label>Votre description</label>
+				<textarea name="descri" placeholder="Votre description,
+exemple: Thomas XXans region parisienne, recherche femme licorne mature et sans complexe"><% if (locals.descri) %><%= locals.descri %></textarea>
+            </div>
+			<div class="ui center">
+				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+            </div>
+		</div>
+		</form>
+
+	</div>
+	</div>
 				</div>
-		</div>
-		</div>
-		</div>
-				
-		<div class="column">
-			<div class="ui segment none">
-			</div>
-		</div>
-		<br>
-		<hr style="width:100%">
-		<div class="ui container">
-			<div class="left ui small images">
-				<img class="profil" src="images/profil/steve.jpg">
-				<img class="profil" src="images/profil/steve.jpg">
-			</div>
-		</div>
-		<div class="ui container">
-			<div class="left ui small images">
-				<img class="profil" src="images/profil/steve.jpg">
-				<img class="profil" src="images/profil/steve.jpg">
-			</div>
-		</div>
-									<h3>
-				<a href="/user_edit">Editez votre profil</a>
-				<% if (!locals.ok) { %>
-					<div class="ui left pointing red basic label" style="background:none">
-						 Vous devez editer votre profil pour pouvoir continuer!
-					</div>
-				<% } %>
-			</h3>
-		</div>
 </div>
 
 <% include footer %>

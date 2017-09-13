@@ -64,6 +64,7 @@ app.use(function(req, res, next) {
 	res.locals.age = req.session.age
 	res.locals.ok = req.session.ok
 	res.locals.interest = req.session.interest
+	res.locals.descri = req.session.descri
   next()
 })
 
