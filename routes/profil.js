@@ -1,7 +1,10 @@
 var express = require('express'),
 	connect = require('../config/database.js'),
 	session = require('express-session'),
+	fileUpload = require('express-fileupload'),
 	router = express.Router()
+
+router.use(fileUpload())
 
 router.get('/', function(req, res, next) {
 	if (req.session && req.session.login) {
@@ -17,9 +20,17 @@ router.get('/', function(req, res, next) {
 		connect.query("SELECT tag FROM tag WHERE login = ?", [req.session.login], (err, rows, result) => {
 			if (err) console.log(err)
 			res.locals.tag = rows
-			connect.query("SELECT description FROM user WHERE login = ?", [req.session.login], (err, rows, result) => {
+			connect.query("SELECT description FROM user WHERE login = ?", [req.session.login], (err, rows1, result) => {
 				if (err) console.log(err)
-				res.render('profil', { descri: rows[0].description})
+				connect.query("SELECT mainpic FROM user WHERE login = ?", [req.session.login], (err, rows2, result) => {
+					if (err) console.log(err)
+					console.log(rows2)
+					console.log(rows2[0].mainpic)
+					if (rows2)
+						res.render('profil', { descri: rows1[0].description, mainpic: rows2[0].mainpic})
+					else
+						res.render('profil', { descri: rows1[0].description})
+				})
 			})
 		})
 	} else {
@@ -81,6 +92,40 @@ router.post('/des', function(req, res, next) {
 		}
 	} else {
 		req.session.error = 'Vous devez vous connecter pour acceder a cette page.'
+		res.redirect('/')
+	}
+})
+
+router.post('/upload', function(req, res, next) {
+	if (req.session && req.session.login) {
+		console.log(req.files)
+		if (!req.files) {
+			req.session.error = 'Pas d\'image d\'upload'
+			res.redirect('/profil')
+		} else {
+			var file = req.files.uploaded_image
+			var img_name = file.name
+
+			if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png") {
+				file.mv('public/images/upload_images/'+file.name, function(err) {
+					if (err) {
+						req.session.error = 'Une erreur est survenue'
+						res.redirect('/profil')
+					}
+					connect.query("UPDATE user SET mainpic = ? WHERE login = ?", [img_name, req.session.login], (err) => {
+						if (err) console.log(err)
+						req.session.success = "Votre image a bien ete upload"
+						res.redirect('/profil')
+					})
+				})
+			} else {
+				req.session.error = 'Le format ne correspond pas'
+				req.session.info = "Les formats pris en compte sont: .png, .jpg"
+				res.redirect('/profil')
+			}
+		}
+	} else {
+		req.session.error = 'Vous devez vous connecter pour acceder a cette page'
 		res.redirect('/')
 	}
 })
