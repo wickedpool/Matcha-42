@@ -27,7 +27,8 @@
 		<div class="ui segment">
 			<div class="ui teal empty circular label"></div> En Ligne
 			<hr class="ui">
-			<div class="ui large header" style="color:white"> <%= locals.name + ' ' + locals.lastname %> </div>
+			<form class="ui form segment" method="post" action="/profil/base">
+				<div class="ui large header" style="color:white"> <%= locals.name + ' ' + locals.lastname %> </div>
 			<% if (locals.sexe == "male") { %>
 				<p>
 					Homme, <%= locals.age %>ans
@@ -44,9 +45,30 @@
 			<% } else if (locals.interest == "both") { %>
 				<p> Interresse par: &nbsp; Les deux <p>
 			<% } %>
+			<hr class="ui">
+				<div class="two fields">
+					<div class="field">
+						<label>Edit Name</label>
+						<input placeholder="First Name" name="name" type="text">
+					<hr class="ui">
+						<div class="ui center">
+							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+						</div>
+					</div>
+					<div class="field">
+						<label>Edit lastName</label>
+						<input placeholder="Last Name" name="lastname" type="text">
+					<hr class="ui">
+						<div class="ui center">
+							<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+						</div>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<div class="column">
+	<div class="ui segment">
 	<form class="ui form segment" method="post" action="/profil">
 		<div class="tag">
 			<% if (tag) { %>
@@ -69,6 +91,7 @@
 			<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
 		</div>
 	</form>
+	</div>
 	</div>
 	</div>
 	<% if (!locals.ok) { %>

@@ -130,5 +130,48 @@ router.post('/upload', function(req, res, next) {
 	}
 })
 
+router.post('/base', function(req, res, next) {
+	if (req.session && req.session.login) {
+		var name = req.body.name,
+			lastname = req.body.lastname,
+			RegexBoth = /[a-zA-Z]/
+		if (name) {
+			if (name.search(RegexBoth)) {
+				req.session.error = 'Votre nom ne peux pas contenir de caracteres autres que l\'alphabet meme si vous avez un nom composé!'
+				res.redirect('/profil')
+			} else if (name.length > 18) {
+				req.session.error = 'Votre nom est trop long!'
+				res.redirect('/profil')
+			} else {
+				connect.query('UPDATE user SET name = ? where login = ?', [name, req.session.login], (err) => {
+					if (err) console.log(err)
+					req.session.name = name
+					req.session.success = 'Votre prénom a bien été changé!'
+					res.redirect('/profil')
+				})
+			}
+		}
+		if (lastname) {
+			if (lastname.search(RegexBoth)) {
+				req.session.error = 'Votre nom ne peux pas contenir de caracteres autres que l\'alphabet meme si vous avez un nom composé!'
+				res.redirect('/profil')
+			} else if (name.length > 18) {
+				req.session.error = 'Votre nom est trop long!'
+				res.redirect('/profil')
+			} else {
+				connect.query('UPDATE user SET lastname = ? where login = ?', [lastname, req.session.login], (err) => {
+					if (err) console.log(err)
+					req.session.lastname = lastname
+					req.session.success = 'Votre nom a bien été changé!'
+					res.redirect('/profil')
+				})
+			}
+		}
+	} else {
+		req.session.error = 'Vous devez vous connecter pour acceder a cette page'
+		res.redirect('/')
+	}
+})
+
 
 module.exports = router
