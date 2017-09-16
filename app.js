@@ -12,7 +12,8 @@ var index = require('./routes/index'),
 	profil = require('./routes/profil'),
 	logout = require('./routes/logout'),
 	home = require('./routes/home'),
-	edit = require('./routes/user_edit')
+	edit = require('./routes/user_edit'),
+	user = require('./routes/user')
 
 var app = express()
 
@@ -77,6 +78,7 @@ app.use('/profil', profil)
 app.use('/user_edit', edit)
 app.use('/home', home)
 app.use('/logout', logout)
+app.use('/user', user)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
