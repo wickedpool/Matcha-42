@@ -23,7 +23,7 @@ router.get('/:id', function(req, res, next) {
 							interest = rows[0].interest,
 							age = ageFromString
 							mainpic = rows[0].mainpic,
-							descri = rows[0].descri
+							descri = rows[0].description
 						res.render('user', { title: 'Express', UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic: mainpic, descri: descri, mine: req.session.login })
 					})
 				} else {
