@@ -10,10 +10,12 @@ router.get('/', function(req, res, next) {
 	if (req.session && req.session.login) {
 		connect.query("SELECT * FROM user WHERE login = ?", [req.session.login], (err, rows, result) => {
 			if (err) console.log(err)
-			connect.query("SELECT * FROM tag WHERE login = ? LIMIT 1", [req.session.login], (err1, rows1, result1) => {
+			connect.query("SELECT * FROM tag WHERE login = ?", [req.session.login], (err1, rows1, result1) => {
 				if (err1) console.log(err1)
-				if (rows[0].description && rows[0].mainpic && rows1[0].tag) {
-					req.session.ok = true
+				if (rows[0].description)
+					if (rows[0].mainpic)
+						if (rows1) {
+							req.session.ok = true
 				}
 			})
 		})
@@ -172,6 +174,5 @@ router.post('/base', function(req, res, next) {
 		res.redirect('/')
 	}
 })
-
 
 module.exports = router
