@@ -1,5 +1,13 @@
 <% include header %>
 
+<% if (!profile) { %>
+		<div class="ui negative message">
+		<i class="close icon"></i>
+		<div class="header">
+			IL N'Y A PAS D'UTILISATEURS QUI POURRAIT VOUS INTERRESSER
+		</div>
+		</div>
+<% } else { %>
 <div class="ui people shape">
 <div class="sides">
 	<div class="side active">
@@ -30,5 +38,6 @@
 	</div>
 </div>
 </div>
+<% } %>
 
 <% include footer %>

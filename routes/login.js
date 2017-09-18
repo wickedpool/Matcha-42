@@ -56,6 +56,7 @@ router.post('/', function(req, res) {
 						req.session.mainpic = rows[0].mainpic
 						req.session.age = ageFromString
 						req.session.interest = rows[0].interest
+						req.session.city = rows[0].city
 						connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [login], (err) => {
 							if (err) console.log(err)
 						})
@@ -68,6 +69,7 @@ router.post('/', function(req, res) {
 						req.session.age = ageFromString
 						req.session.name = rows[0].name
 						req.session.interest = rows[0].interest
+						req.session.city = rows[0].city
 						req.session.info = 'Veuillez remplir vos informations personnelles.'
 						req.session.success = "Vous êtes maintenant connecté"
 						res.redirect('/profil')
