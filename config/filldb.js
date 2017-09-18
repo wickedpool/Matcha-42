@@ -44,6 +44,7 @@ connection.query('CREATE TABLE IF NOT EXISTS user (id INT(9) UNSIGNED AUTO_INCRE
 	}
 });
 
+//		TAGS
 connection.query('CREATE TABLE IF NOT EXISTS tag (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, tag VARCHAR(16))', function(err) {
 	if (err) throw err;
 	else {
@@ -51,6 +52,21 @@ connection.query('CREATE TABLE IF NOT EXISTS tag (id INT(9) UNSIGNED AUTO_INCREM
 	}
 });
 
+//		POPULARITY
+connection.query('CREATE TABLE IF NOT EXISTS popularity (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, famous INT(6) NOT NULL)', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table popularity created !');
+	}
+});
+
+//		LIKE
+connection.query('CREATE TABLE IF NOT EXISTS like (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, liked VARCHAR(100) NOT NULL)', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table like created !');
+	}
+});
 
 //End of connection
 connection.end();

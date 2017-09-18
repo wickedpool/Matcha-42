@@ -56,6 +56,9 @@ router.post('/', function(req, res) {
 						req.session.mainpic = rows[0].mainpic
 						req.session.age = ageFromString
 						req.session.interest = rows[0].interest
+						connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [login], (err) => {
+							if (err) console.log(err)
+						})
 						req.session.success = "Vous êtes maintenant connecté"
 						res.redirect('/home')
 					} else {

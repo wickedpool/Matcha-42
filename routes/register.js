@@ -81,28 +81,31 @@ router.post('/', function(req, res) {
 		} else if (rows[0] && rows[0]['login']) {
 			req.session.error = "Le nom d'utilisateur est déjà utilisé"
 		} else {
-			connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?, interest = ?', [login, name, lastname, email, hash, new Date(), age, gender, city, interest], (err, rows, result) => {
-				if (err) {
-					console.log(err)
-					req.session.error = 'Une erreur est survenue. :)'
-					res.redirect('/')
-				} else {
-					iplocation(req.ip, function(error, res) {
-						if (res && res['city']) {
-							connect.query('UPDATE user SET latitude = ?, longitude = ? WHERE login = ?', res['latitude'], res['longitude'], [login], (err) => {
-								if (err) console.log(err)
-							})
-						} else {
-                            connect.query('UPDATE user SET city = "Paris", latitude = 48.8965, longitude = 2.3182 WHERE login = ?', [login], (err) => {
-								if (err) console.log(err)
-							})
-						}
-					})
-				}
-				var s = 'Le formulaire a bien été rempli, bienvenue sur Matcha '
-				s += login
-				req.session.success = s
-				res.redirect('/login')
+			connect.query('INSERT INTO popularity SET login = ?, famous = 5', [login], (err, rows, result) => {
+				if (err) console.log(err)
+				connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?, interest = ?', [login, name, lastname, email, hash, new Date(), age, gender, city, interest], (err, rows, result) => {
+					if (err) {
+						console.log(err)
+						req.session.error = 'Une erreur est survenue. :)'
+						res.redirect('/')
+					} else {
+						iplocation(req.ip, function(error, res) {
+							if (res && res['city']) {
+								connect.query('UPDATE user SET latitude = ?, longitude = ? WHERE login = ?', res['latitude'], res['longitude'], [login], (err) => {
+									if (err) console.log(err)
+								})
+							} else {
+								connect.query('UPDATE user SET city = "Paris", latitude = 48.8965, longitude = 2.3182 WHERE login = ?', [login], (err) => {
+									if (err) console.log(err)
+								})
+							}
+						})
+					}
+					var s = 'Le formulaire a bien été rempli, bienvenue sur Matcha '
+					s += login
+					req.session.success = s
+					res.redirect('/login')
+				})
 			})
 		}
 		})

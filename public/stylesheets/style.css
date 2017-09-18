@@ -136,3 +136,13 @@ div.ui.grid.edit {
 a.ui.label {
 	margin-top:2%
 }
+
+/* HOME PAGE */
+
+div.ui.people.shape {
+	padding: 6% 1%;
+}
+
+div.ui.people.shape:hover {
+	opacity: 0.8
+}
