@@ -4,9 +4,11 @@ var 	express = require('express'),
 		regex = require('regex-email'),
 		bcrypt = require('bcrypt'),
 		iplocation = require('iplocation'),
+		ageCalculator = require('age-calculator'),
 		parse = require('parse').parse,
 		router = express.Router()
 
+var {AgeFromDateString, AgeFromDate} = require('age-calculator')
 const	salt = 10
 
 router.post('/', function(req, res) {
@@ -16,7 +18,9 @@ router.post('/', function(req, res) {
 		email = req.body.email,
 		gender = req.body.gender,
 		city = req.body.city,
-		age = req.body.age,
+		age = new AgeFromDateString(req.body.age).age
+		console.log(age)
+		console.log("'''''''''''''''''''''''''")
 		pswd = req.body.pswd,
 		repswd = req.body.repswd,
 		interest = req.body.interest
@@ -66,7 +70,7 @@ router.post('/', function(req, res) {
 		} else if (pswd.length < 6) {
 			req.session.error = 'Le mot de passe doit contenir au minimum 6 caracteres!'
 			res.redirect('/')
-		} else if (age.search(RegexDate)) {
+		} else if (req.body.age.search(RegexDate)) {
 			req.session.error = 'Le format de la date n\'est pas valide!'
 			res.redirect('/')
 		} else if (name.length < 3 || lastname.length < 3) {
@@ -80,6 +84,10 @@ router.post('/', function(req, res) {
 			res.redirect('/')
 		} else if (rows[0] && rows[0]['login']) {
 			req.session.error = "Le nom d'utilisateur est déjà utilisé"
+			res.redirect('/')
+		} else if (age < 18) {
+			req.session.error = "Vous etes trop jeune"
+			res.redirect('/')
 		} else {
 			connect.query('INSERT INTO popularity SET login = ?, famous = 5', [login], (err, rows, result) => {
 				if (err) console.log(err)

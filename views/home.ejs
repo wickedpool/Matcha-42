@@ -8,36 +8,43 @@
 		</div>
 		</div>
 <% } else { %>
-<div class="ui people shape">
-<div class="sides">
-	<div class="side active">
-		<div class="ui card">
-			<div class="image">
-				<img src="/images/profil/steve.jpg">
-			</div>
-			<div class="content">
-				<div class="header">Steve Jobes</div>
-					<div class="meta">
-						<a>Acquaintances</a>
+	<% profile.forEach(function(element) { %>
+	<% var pic = element["mainpic"] %>
+	<% var name = element["name"] %>
+	<% var lname = element["lastname"] %>
+	<% var sexe = element["sexe"] %>
+	<% var age = element["age"] %>
+	<% var descri = element["description"] %>
+	<% var login = element["login"] %>
+	<a href="user/<%= login %>">
+		<div class="ui people shape">
+		<div class="sides">
+			<div class="side active">
+				<div class="ui card">
+					<div class="image">
+						<img src="/images/upload_images/<%= pic %>">
 					</div>
-					<div class="description">
-					Steve Jobes is a fictional character designed to resemble someone familiar to readers.
+					<div class="content">
+						<div class="header"><%= name %> <%= lname %></div>
+							<div class="meta">
+								<%= sexe %>, <%= age %>
+							</div>
+							<div class="description">
+								<%= descri %>
+							</div>
+						</div>
+						<div class="extra content">
+							<span class="right floated">
+							Joined in 2017
+							</span>
+							<span>
+						</div>
 					</div>
-				</div>
-				<div class="extra content">
-					<span class="right floated">
-					Joined in 2014
-					</span>
-					<span>
-					<i class="user icon"></i>
-					151 Friends
-					</span>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
-</div>
+		</div>
+	<% }) %>
 <% } %>
 
 <% include footer %>

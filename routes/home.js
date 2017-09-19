@@ -13,28 +13,28 @@ router.get('/', function(req, res, next) {
 				descri = req.session.descri
 				city = req.session.city
 			if (interest == "female") {
-				connect.query("SELECT login, name, lastname, sexe, age, interest, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL", ["female", city, login], (err, rows, result) => {
+				connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL", ["female", city, login], (err, rows, result) => {
 					if (err) console.log(err)
 					var profile = rows
 					console.log(profile)
 					console.log("======================")
-					res.render('home', { title: 'Express', profile: profile})
+					res.render('home', { title: 'Express', profile: profile })
 				})
 			} else if (interest == "male") {
-				connect.query("SELECT login, name, lastname, sexe, age, interest, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL", ["male", city, login], (err, rows, result) => {
+				connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL", ["male", city, login], (err, rows, result) => {
 					if (err) console.log(err)
 					var profile = rows
 					console.log(profile)
 					console.log("----------------------")
-					res.render('home', { title: 'Express', profile: profile})
+					res.render('home', { title: 'Express', profile: profile })
 				})
 			} else if (interest == "both") {
-				connect.query("SELECT login, name, lastname, sexe, age, interest, mainpic FROM user WHERE city = ? AND login != ? AND mainpic IS NOT NULL", [city, login], (err, rows, result) => {
+				connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE city = ? AND login != ? AND mainpic IS NOT NULL", [city, login], (err, rows, result) => {
 					if (err) console.log(err)
 					var profile = rows
 					console.log(profile)
 					console.log("///////////////////////")
-					res.render('home', { title: 'Express', profile: profile})
+					res.render('home', { title: 'Express', profile: profile })
 				})
 			}
 		} else {

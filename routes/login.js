@@ -5,6 +5,7 @@ var express = require('express'),
 	bcrypt = require('bcrypt'),
 	router = express.Router()
 
+// can delete that
 let {AgeFromDateString, AgeFromDate} = require('age-calculator')
 
 router.get('/', function(req, res, next) {
