@@ -61,7 +61,7 @@ connection.query('CREATE TABLE IF NOT EXISTS popularity (id INT(9) UNSIGNED AUTO
 });
 
 //		LIKE
-connection.query('CREATE TABLE IF NOT EXISTS like (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, liked VARCHAR(100) NOT NULL)', function(err) {
+connection.query('CREATE TABLE IF NOT EXISTS liked (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, liked VARCHAR(100) NOT NULL)', function(err) {
 	if (err) throw err;
 	else {
 		console.log('Table like created !');
