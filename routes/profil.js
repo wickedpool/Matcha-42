@@ -15,7 +15,11 @@ router.get('/', function(req, res, next) {
 				if (rows[0].description)
 					if (rows[0].mainpic)
 						if (rows1) {
-							req.session.ok = true
+							connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [req.session.login], (err) => {
+								if (err) console.log(err)
+								req.session.ok = true
+								req.session.mainpic = rows[0].mainpic
+					})
 				}
 			})
 		})

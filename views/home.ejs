@@ -7,45 +7,35 @@
 <br>
 <h5 class="ui horizontal header divider" style="color:white">
   <i class="bar chart icon" style="color:white"></i>
-  Specifications
+  Filtrer par :
 </h5>
 
-<form class="ui form segment" style="color:white;background:none" method="post" action="/home/tri" >
-	<div class="inline fields">
-		<label style="color:white">Trier par :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-		<div class="field">
-			<div class="ui radio checkbox">
-				<input type="checkbox" name="defau" checked="checked">
-				<label>Default</label>
-			</div>
-		</div>
-		<div class="field">
-			<div class="ui radio checkbox">
-				<input type="checkbox" name="famous">
-				<label>Popularite</label>
-			</div>
-		</div>
-		<div class="field">
-			<div class="ui radio checkbox">
-				<input type="checkbox" name="tags">
-				<label>Tags</label>
-			</div>
-		</div>
-		<div class="field">
-			<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Trier">
-		</div>
+<div class="center aligned">
+	<div class="field">
+		<form class="ui center aligned form segment" style="color:white;background:none" method="post" action="/home/tag" >
+			<button type="submit" class="ui red button">
+				<i class="tag icon"></i> Tags
+			</button>
+		</form>
 	</div>
-</form>
+	<div class="field">
+		<form class="ui center aligned form segment" style="color:white;background:none" method="post" action="/home/famous">
+			<button type="submit" class="ui red button">
+				<i class="star icon"></i> Popularity
+			</button>
+		</form>
+	</div>
+</div>
 
 <hr>
 
 <% if (!profile) { %>
-		<div class="ui negative message">
+	<div class="ui negative message">
 		<i class="close icon"></i>
 		<div class="header">
 			IL N'Y A PAS D'UTILISATEURS QUI POURRAIT VOUS INTERRESSER
 		</div>
-		</div>
+	</div>
 <% } else { %>
 	<% profile.forEach(function(element) { %>
 	<% var pic = element["mainpic"] %>

@@ -66,6 +66,7 @@ app.use(function(req, res, next) {
 	res.locals.ok = req.session.ok
 	res.locals.interest = req.session.interest
 	res.locals.descri = req.session.descri
+	res.locals.mainpic = req.session.mainpic
   next()
 })
 

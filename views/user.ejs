@@ -1,7 +1,7 @@
 <% include header %>
 
 <div class="ui segment">
-<h2 class="ui right floated header"><%= login2 %> profile</h2>
+<h2 class="ui right floated header"><%= login2 %>'s profile</h2>
 <br>
 <hr>
 <br>
@@ -14,9 +14,21 @@
 				<% } else { %>
 					<img class="ui medium circular image" src="../images/profil/steve.jpg">
 				<% } %>
-				<div class="ui button">
-    				<i class="heart icon"></i> Like
-				</div>
+				<% if (login2 != mine) { %>
+					<% if (locals.liked == "ok") { %>
+						<form class="ui form segment" style="color:white;background:none" method="post" action="/user/unlike" >
+							<button type="submit" class="ui button">
+								<i class="heart icon"></i> Unlike
+							</button>
+						</form>
+					<% } else { %>
+						<form class="ui form segment" style="color:white;background:none" method="post" action="/user/like" >
+							<button type="submit" class="ui red button">
+								<i class="heart icon"></i> Like
+							</button>
+						</form>
+					<% } %>
+				<% } %>
 		</div>
 	</div>
     <div class="column">
