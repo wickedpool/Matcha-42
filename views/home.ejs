@@ -12,28 +12,29 @@
 
 <div class="center aligned">
 	<div class="field">
-		<form class="ui center aligned form segment" style="color:white;background:none" method="post" action="/home/tag" >
-			<button type="submit" class="ui red button">
+		<a href="/home/tag">
+			<button type="submit" class="ui red button" style="display:block;margin:auto">
 				<i class="tag icon"></i> Tags
 			</button>
-		</form>
+		</a>
 	</div>
+	<br/>
 	<div class="field">
-		<form class="ui center aligned form segment" style="color:white;background:none" method="post" action="/home/famous">
-			<button type="submit" class="ui red button">
+		<a href="/home/famous">
+			<button type="submit" class="ui red button" style="display:block;margin:auto">
 				<i class="star icon"></i> Popularity
 			</button>
-		</form>
+		</a>
 	</div>
 </div>
 
 <hr>
 
-<% if (!profile) { %>
+<% if (profile == undefined) { %>
 	<div class="ui negative message">
 		<i class="close icon"></i>
 		<div class="header">
-			IL N'Y A PAS D'UTILISATEURS QUI POURRAIT VOUS INTERRESSER
+			IL N'Y A PAS D'UTILISATEURS QUI POURRAIENT VOUS INTERRESSER
 		</div>
 	</div>
 <% } else { %>
@@ -78,3 +79,9 @@
 
 
 <% include footer %>
+
+<script>
+$(".close.icon").click(function(){
+  $(this).parent().hide();
+});
+</script>
