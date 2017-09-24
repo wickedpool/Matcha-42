@@ -1,21 +1,29 @@
 var		express = require('express'),
  		path = require('path'),
 		favicon = require('serve-favicon'),
+		app = express(),
  		logger = require('morgan'),
+		connect = require('./config/database.js')
 		cookieParser = require('cookie-parser'),
 	 	bodyParser = require('body-parser'),
-	 	session = require('express-session')
+		server = require('http').createServer(app),
+		io = require('socket.io')(server),
+		socketIOSession = require("socket.io.session")
 
-var index = require('./routes/index'),
-	register = require('./routes/register'),
-	login = require('./routes/login'),
-	profil = require('./routes/profil'),
-	logout = require('./routes/logout'),
-	home = require('./routes/home'),
-	edit = require('./routes/user_edit'),
-	user = require('./routes/user')
+var		session = require("express-session")({
+			secret: "i901884384jdowkkd",
+			resave: true,
+			saveUninitialized: true
+		})
 
-var app = express()
+var 	index = require('./routes/index'),
+		register = require('./routes/register'),
+		login = require('./routes/login'),
+		profil = require('./routes/profil'),
+		logout = require('./routes/logout'),
+		home = require('./routes/home'),
+		edit = require('./routes/user_edit'),
+		user = require('./routes/user')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
@@ -28,12 +36,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use(session({
-	secret: "i901884384jdowkkd",
-	resave: false,
-	saveUninitialized: true,
-	cookie: { secure: false }
-}))
+app.use(session)
+//io.use(socketIOsession(session))
 
 app.use(function (req, res, next) {
 	if (req.session) {
@@ -70,7 +74,6 @@ app.use(function(req, res, next) {
   next()
 })
 
-
 //Routes
 app.use('/', index)
 app.use('/register', register)
@@ -80,6 +83,23 @@ app.use('/user_edit', edit)
 app.use('/home', home)
 app.use('/logout', logout)
 app.use('/user', user)
+
+io.on('connection', socket => {
+	console.log('laaaaaaa');
+})
+
+//io.sockets.on("connection", function(socket) {
+//	console.log('=============')
+//	connection.query('UPDATE user SET online = 1 WHERE login = ?', [session.login], (err) => {
+//		if (err) console.log(err)
+//	})
+//	socket.on('disconnect', function () {
+//		connection.query('UPDATE user SET online = 0 WHERE login = ?', [session.login], (err) => {
+//			if (err) console.log(err)
+//		})
+//	})
+//})
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

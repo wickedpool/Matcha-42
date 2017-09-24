@@ -82,6 +82,7 @@ router.get('/tag', function(req, res, next) {
 								arr[k] = rows1[j].login
 								k++;
 							}
+							console.log(arr)
 						}
 					})
 					i++

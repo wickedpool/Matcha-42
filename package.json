@@ -25,6 +25,7 @@
     "regex-email": "^1.0.2",
     "serve-favicon": "^2.4.3",
     "socket.io": "^2.0.3",
+    "socket.io.session": "^1.0.13",
     "update": "^0.7.4"
   },
   "homepage": "http://localhost:8080/index.html",
