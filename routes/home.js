@@ -73,17 +73,15 @@ router.get('/tag', function(req, res, next) {
 			if (rows[0] != undefined) {
 				var i = 0;
 				var arr = []
+				var k = 0;
 				while (rows[i]) {
 					connect.query("SELECT login from tag WHERE login != ? AND tag = ?", [req.session.login, rows[i].tag], (err1, rows1, result1) => {
 						if (err) console.log(err)
-						console.log('////////////////////////')
-						console.log(rows1)
 						if (rows1.length != 0) {
-							console.log(rows1)
-							console.log('==============')
-							arr.push(rows1)
-							console.log('==============')
-							console.log(arr)
+							for (var j=0;rows1[j];j++) {
+								arr[k] = rows1[j].login
+								k++;
+							}
 						}
 					})
 					i++
