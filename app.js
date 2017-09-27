@@ -7,8 +7,9 @@ var		express = require('express'),
 		cookieParser = require('cookie-parser'),
 	 	bodyParser = require('body-parser'),
 		server = require('http').createServer(app),
-		io = require('socket.io')(server),
 		socketIOSession = require("socket.io.session")
+
+app.io = require('socket.io')(server)
 
 var		session = require("express-session")({
 			secret: "i901884384jdowkkd",
@@ -84,9 +85,23 @@ app.use('/home', home)
 app.use('/logout', logout)
 app.use('/user', user)
 
-io.on('connection', socket => {
-	console.log('laaaaaaa');
-})
+app.io.on('connection', function(socket){
+	console.log('a user connected');
+	var me;
+	socket.on('login', function(user){
+		console.log("===========");
+		console.log(user);
+		me = user.login;
+	});
+	socket.on('log', function(login){
+		console.log(login);
+		me = login;
+	});
+	socket.on('disconnect', function () {
+		console.log("------------------------------")
+		// sql
+  	});
+});
 
 //io.sockets.on("connection", function(socket) {
 //	console.log('=============')

@@ -5,7 +5,7 @@
 <h4>Always good to see you !</h4>
 <hr>
 	<img src="images/matcha1.png" class="logoform">
-<form class="ui form segment" method="post" action="/login">
+<form class="ui form segment" id="logged" method="post" action="/login">
 	<div class="field">
 		<label>Login</label>
 		<input type="text" name="login" placeholder="Login">
@@ -23,3 +23,13 @@
 </div>
 
 <% include footer %>
+
+<script>
+
+	$('#logged').submit(function(event){
+	socket.emit('log', {
+		login	: $('#login').val();
+	})
+})
+
+</script>

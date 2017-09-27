@@ -12,16 +12,16 @@
 	<hr>
 	<div class="field example">
 		<img src="images/matcha1.png" class="logoform">
-		<form class="ui form segment" method="post" action="/register">
+		<form class="ui form segment" id="loginform" method="post" action="/register">
 			<div class="two fields">
 				<div class="field">
 					<label>Name</label>
-					<input placeholder="First Name" name="name" type="text">
+					<input placeholder="First Name" name="name" type="text" id="name">
 				</div>
 				<div class="field">
 					<label>Gender</label>
 					<div class="ui dropdown selection" tabindex="0">
-						<select name="gender">
+						<select name="gender" id="gender">
 							<option value="">Gender</option>
 							<option value="male">Male</option>
 							<option value="female">Female</option>
@@ -40,42 +40,42 @@
 			<div class="two fields">
 				<div class="field">
 					<label>Lastname</label>
-					<input placeholder="Lastname" name="lastname" type="text">
+					<input placeholder="Lastname" name="lastname" type="text" id="lastname">
 				</div>
 				<div class="field">
 					<label>Email</label>
-					<input placeholder="Email@youremail.com" type="email" name="email">
+					<input placeholder="Email@youremail.com" type="email" name="email" id="email">
 				</div>
 			</div>
 			<div class="two fields">
 				<div class="field">
 					<label>Login</label>
-					<input placeholder="Login" name="login" type="text">
+					<input placeholder="Login" name="login" type="text" id="login">
 				</div>
 				<div class="field">
 					<label>City</label>
-					<input placeholder="City" type="text" name="city">
+					<input placeholder="City" type="text" name="city" id="city">
 				</div>
 			</div>
 			<div class="two fields">
 				<div class="field">
 					<label>Password</label>
-					<input placeholder="Password" name="pswd" type="password">
+					<input placeholder="Password" name="pswd" type="password" id="pswd">
 				</div>
 				<div class="field">
 					<label>Repeat Password</label>
-					<input placeholder="Again" type="password" name="repswd">
+					<input placeholder="Again" type="password" name="repswd" id="repswd">
 				</div>
 			</div>
 			<div class="two fields">
 				<div class="field">
 					<label>Birth date</label>
-					<input type="date" name="age">
+					<input type="date" name="age" id="age">
 				</div>
 				<div class="field">
 					<label>Interest</label>
 					<div class="ui dropdown selection" tabindex="0">
-						<select name="interest">
+						<select name="interest" id="interest">
 							<option value="">Interest</option>
 							<option value="male">Male</option>
 							<option value="female">Female</option>
@@ -89,11 +89,6 @@
 							<div class="item" data-value="both">Both</div>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div class="inline field">
-				<div class="ui checkbox">
-					<input type="checkbox" name="terms" tabindex="0">
 				</div>
 			</div>
 			<div class="ui center">
@@ -113,3 +108,18 @@
 
 <% include footer %>
 
+<script>
+
+	$('#loginform').submit(function(event){
+	socket.emit('login', {
+		name	: $('#name').val(),
+		lastname: $('#lastname').val(),
+		email	: $('#email').val(),
+		login	: $('#login').val(),
+		city	: $('#city').val(),
+		age		: $('#age').val(),
+		interest: $('#interest').val()
+	})
+})
+
+</script>
