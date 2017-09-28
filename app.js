@@ -93,8 +93,9 @@ app.io.on('connection', function(socket){
 		console.log(user);
 		me = user.login;
 	});
-	socket.on('log', function(login){
-		console.log(login);
+	socket.on('log', function(user){
+		console.log("////////////////");
+		console.log(user);
 		me = login;
 	});
 	socket.on('disconnect', function () {

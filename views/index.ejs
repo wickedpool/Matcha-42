@@ -111,6 +111,7 @@
 <script>
 
 	$('#loginform').submit(function(event){
+	event.prevent.Default()
 	socket.emit('login', {
 		name	: $('#name').val(),
 		lastname: $('#lastname').val(),
