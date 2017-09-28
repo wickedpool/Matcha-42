@@ -107,20 +107,3 @@
 <!-- wrapper -->
 
 <% include footer %>
-
-<script>
-
-	$('#loginform').submit(function(event){
-	event.prevent.Default()
-	socket.emit('login', {
-		name	: $('#name').val(),
-		lastname: $('#lastname').val(),
-		email	: $('#email').val(),
-		login	: $('#login').val(),
-		city	: $('#city').val(),
-		age		: $('#age').val(),
-		interest: $('#interest').val()
-	})
-})
-
-</script>

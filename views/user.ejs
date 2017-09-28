@@ -9,26 +9,27 @@
   <div class="doubling three column row">
     <div class="column">
 		<div class="ui segment">
-				<% if (mainpic) { %>
-                	<img alt="User Pic" src="../images/upload_images/<%=mainpic%>" class="ui medium circular image">	
+			<% if (mainpic1) { %>
+				<img alt="User Pic" src="../images/upload_images/<%=mainpic1%>" class="ui medium circular image">	
+			<% } else { %>
+				<img class="ui medium circular image" src="../images/profil/steve.jpg">
+			<% } %>
+			<% if (login2 != mine) { %>
+				<% if (locals.liked == "ok") { %>
+					<form class="ui form segment" style="color:white;background:none" method="post" action="/user/unlike" >
+						<button type="submit" class="ui button">
+							<i class="heart icon"></i> Unlike
+						</button>
+					</form>
 				<% } else { %>
-					<img class="ui medium circular image" src="../images/profil/steve.jpg">
+					<form class="ui form segment" style="color:white;background:none" method="post" action="/user/like" >
+						<button type="submit" class="ui red button">
+							<i class="heart icon"></i> Like
+						</button>
+					</form>
+		
 				<% } %>
-				<% if (login2 != mine) { %>
-					<% if (locals.liked == "ok") { %>
-						<form class="ui form segment" style="color:white;background:none" method="post" action="/user/unlike" >
-							<button type="submit" class="ui button">
-								<i class="heart icon"></i> Unlike
-							</button>
-						</form>
-					<% } else { %>
-						<form class="ui form segment" style="color:white;background:none" method="post" action="/user/like" >
-							<button type="submit" class="ui red button">
-								<i class="heart icon"></i> Like
-							</button>
-						</form>
-					<% } %>
-				<% } %>
+			<% } %>
 		</div>
 	</div>
     <div class="column">
@@ -71,18 +72,27 @@
 	</div>
 	<br>
 	<hr style="width:100%">
+	<center style="margin-left:auto;margin-right:auto;display:block;">
+		<a href="/message/<%= login2 %>">
+		<div class="ui vertical animated button" style="width:250%" tabindex="0">
+			<div class="hidden content">talk</div>
+			<div class="visible content">
+				 <i class="talk icon"></i>
+			</div>
+		</div>
+		</a>
+	</center>
 	<div class="ui segment textarea">
 	<div class="column">
 		<div class="ui form">
-			<div class="field">
+			<div class="field" style="margin-top:-8%">
 				<label>description</label>
 				<textarea disabled name="descri"><%= descri %></textarea>
-            </div>
+    		</div>
 		</div>
 	</div>
 	</div>
 	</div>
 </div>
-
 
 <% include footer %>

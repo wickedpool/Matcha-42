@@ -24,6 +24,7 @@ var 	index = require('./routes/index'),
 		logout = require('./routes/logout'),
 		home = require('./routes/home'),
 		edit = require('./routes/user_edit'),
+		message = require('./routes/message'),
 		user = require('./routes/user')
 
 // view engine setup
@@ -84,23 +85,28 @@ app.use('/user_edit', edit)
 app.use('/home', home)
 app.use('/logout', logout)
 app.use('/user', user)
+app.use('/message', message)
 
 app.io.on('connection', function(socket){
 	console.log('a user connected');
-	var me;
-	socket.on('login', function(user){
-		console.log("===========");
-		console.log(user);
-		me = user.login;
-	});
+	var me = false;
 	socket.on('log', function(user){
-		console.log("////////////////");
-		console.log(user);
-		me = login;
+		console.log(user)
+		me = user.login
+		console.log("======ldl=====")
+		console.log(me)
+		connect.query("UPDATE user SET online = 1 WHERE login = ?", [me], (err) => {
+			if (err) threw (err)
+		})
 	});
 	socket.on('disconnect', function () {
+		if (!me) {
+			return false;
+		}
 		console.log("------------------------------")
-		// sql
+		//connect.query("UPDATE user SET online = 0 WHERE login = ?", [me], (err) => {
+		//	if (err) threw (err)
+		//})
   	});
 });
 

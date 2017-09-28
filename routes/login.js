@@ -57,6 +57,9 @@ router.post('/', function(req, res) {
 						connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [login], (err) => {
 							if (err) console.log(err)
 						})
+						connect.query("UPDATE user SET online = 1 WHERE login = ?", [login], (err) => {
+							if (err) threw (err)
+						})
 						req.session.success = "Vous êtes maintenant connecté"
 						res.redirect('/home')
 					} else {

@@ -4,9 +4,8 @@ var mysql      = require('mysql');
 
 var connection = mysql.createConnection({
 	host     : 'localhost',
-	port	 : 3307,
+	port	 : 3306,
 	user     : 'root',
-	password : 'root',
 });
 
 //Catching errors
@@ -67,6 +66,14 @@ connection.query('CREATE TABLE IF NOT EXISTS liked (id INT(9) UNSIGNED AUTO_INCR
 	}
 });
 
+//matched
+connection.query('CREATE TABLE IF NOT EXISTS matched (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, matched VARCHAR(100) NOT NULL)', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table match created !');
+	}
+}
+
 //FILL TABLE USER :
 //
 // wickedpool
@@ -76,6 +83,7 @@ connection.query('INSERT INTO tag SET login = "wickedpool", tag = "oklm"');
 connection.query('INSERT INTO tag SET login = "wickedpool", tag = "easy"');
 connection.query('INSERT INTO tag SET login = "wickedpool", tag = "alcool"');
 connection.query('INSERT INTO tag SET login = "wickedpool", tag = "bedo"');
+console.log('User wickedpool created !');
 //
 // glouyot
 //
@@ -84,6 +92,7 @@ connection.query('INSERT INTO tag SET login = "glouyot", tag = "hey"');
 connection.query('INSERT INTO tag SET login = "glouyot", tag = "lutins"');
 connection.query('INSERT INTO tag SET login = "glouyot", tag = "alcool"');
 connection.query('INSERT INTO tag SET login = "glouyot", tag = "drug"');
+console.log('User glouyot created !');
 //
 // jorobin
 //
@@ -92,6 +101,7 @@ connection.query('INSERT INTO tag SET login = "jorobin", tag = "hey"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyo"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyi"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyueu"');
+console.log('User jorobin created !');
 //
 // cuzureau
 //
@@ -100,14 +110,16 @@ connection.query('INSERT INTO tag SET login = "cuzureau", tag = "alcool"');
 connection.query('INSERT INTO tag SET login = "cuzureau", tag = "heyoo"');
 connection.query('INSERT INTO tag SET login = "cuzureau", tag = "cc"');
 connection.query('INSERT INTO tag SET login = "cuzureau", tag = "hey"');
+console.log('User cuzureau created !');
 //
 // mkantzer
 //
-connection.query('INSERT INTO user SET login = "mkantzer", name = "Manon", lastname = "Kantzer", email = "mkantzer@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", mainpic = "jorobin.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "mkantzer", name = "Manon", lastname = "Kantzer", email = "mkantzer@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", mainpic = "mkantzer.jpg", latitude = "48.8965", longitude = "2.3182"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "hey"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyo"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyi"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyueu"');
+console.log('User mkantzer created !');
 //
 // arive-de
 //
@@ -116,6 +128,7 @@ connection.query('INSERT INTO tag SET login = "arive-de", tag = "biit"');
 connection.query('INSERT INTO tag SET login = "arive-de", tag = "oklm"');
 connection.query('INSERT INTO tag SET login = "arive-de", tag = "joy"');
 connection.query('INSERT INTO tag SET login = "arive-de", tag = "happy"');
+console.log('User arive-de created !');
 //
 // cfatrane
 //
@@ -124,6 +137,7 @@ connection.query('INSERT INTO tag SET login = "cfatrane", tag = "oklm"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "briquets"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "easy"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "bites"');
+console.log('User cfatrane created !');
 
 //End of connection
 connection.end();
