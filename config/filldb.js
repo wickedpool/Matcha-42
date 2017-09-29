@@ -4,8 +4,9 @@ var mysql      = require('mysql');
 
 var connection = mysql.createConnection({
 	host     : 'localhost',
-	port	 : 3306,
+	port	 : 3307,
 	user     : 'root',
+	password : 'root',
 });
 
 //Catching errors
@@ -66,13 +67,29 @@ connection.query('CREATE TABLE IF NOT EXISTS liked (id INT(9) UNSIGNED AUTO_INCR
 	}
 });
 
-//matched
+//		MATCHED
 connection.query('CREATE TABLE IF NOT EXISTS matched (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, matched VARCHAR(100) NOT NULL)', function(err) {
 	if (err) throw err;
 	else {
 		console.log('Table match created !');
 	}
-}
+})
+
+//		NOTIFICATIONS
+connection.query('CREATE TABLE IF NOT EXISTS notif (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, sendat DATETIME, type VARCHAR(20), msg VARCHAR(50))', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table notif created !');
+	}
+})
+
+//		MESSAGES
+connection.query('CREATE TABLE IF NOT EXISTS message (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, sendat DATETIME, user VARCHAR(100) NOT NULL)', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table message created !');
+	}
+})
 
 //FILL TABLE USER :
 //

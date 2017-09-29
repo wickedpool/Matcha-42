@@ -1,3 +1,32 @@
 <% include header %>
 
+<div class="ui segment">
+	<h2 class="ui right floated header">Vos messages</h2>
+	<br>
+	<hr>
+<% matched.forEach(function(element) { %>
+	<% var pic = element["mainpic"] %>
+	<% var login = element["matched"] %>
+		<div class="ui items" style="margin-left:auto;margin-right:auto;display:block">
+			<div class="item oklm">
+				<a class="ui tiny image" href="/chat/<%= login %>">
+					<img src="/images/upload_images/<%= pic %>">
+				</a>
+				<div class="middle aligned content">
+					<div class="header" style="color:white">
+						<i class="like icon"></i>
+						<%= login %>
+						<div class="ui left pointing label" style="margin-left=15%;">
+							Cliquez sur l'image pour parler
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+<% }) %>
+</div>
+
 <% include footer %>
+
+<script>
+</script>
