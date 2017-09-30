@@ -103,16 +103,11 @@ app.io.on('connection', function(socket){
 
 	socket.on('newmsg', function(message){
 		message.user = global.me
-		console.log('MESSAGE ===== ==== ====== ===== ====== === ' + message.message)
-		console.log('ME ===== ==== ====== ===== ====== === ' + message.user)
-		console.log('talkto ===== ==== ====== ===== ====== === ' + message.recup)
-			message.h = date.getHours(),
-			message.m = date.getMinutes();
-		connect.query('INSERT INTO message SET login = ?, user = ?, message = ?', [message.user, message.recup, message.message], (err) => {
+		message.h = date.getHours(),
+		message.m = date.getMinutes();
+		connect.query('INSERT INTO message SET login = ?, new Date(), user = ?, message = ?', [message.user, message.recup, message.message], (err) => {
 			if (err) console.log(err)
-			io.socket.emit('newmsg', {
-				
-			})
+			io.socket.emit('newmsg', message);
 		})
 	})
 
