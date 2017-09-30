@@ -28,8 +28,7 @@
 
 	$('#logged').submit(function(event){
 	socket.emit('log', {
-		login	: $('#login').val(),
-		ps		: $('#pswd').val()
+		login	: $('#login').val()
 	})
 })
 

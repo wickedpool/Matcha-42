@@ -89,28 +89,42 @@ app.use('/user', user)
 app.use('/chat', chat)
 app.use('/message', message)
 
+global.me = undefined
+
 app.io.on('connection', function(socket){
-	console.log('a user connected');
-	var me = false;
+	console.log('a user connected')
+	var me = false
 	socket.on('log', function(user){
-		console.log(user)
-		me = user.login
-		console.log("======ldl=====")
-		console.log(me)
-		connect.query("UPDATE user SET online = 1 WHERE login = ?", [me], (err) => {
+		global.me = user.login
+		connect.query("UPDATE user SET online = 1 WHERE login = ?", [global.me], (err) => {
 			if (err) threw (err)
 		})
-	});
+	})
+
+	socket.on('newmsg', function(message){
+		message.user = global.me
+		console.log('MESSAGE ===== ==== ====== ===== ====== === ' + message.message)
+		console.log('ME ===== ==== ====== ===== ====== === ' + message.user)
+		console.log('talkto ===== ==== ====== ===== ====== === ' + message.recup)
+			message.h = date.getHours(),
+			message.m = date.getMinutes();
+		connect.query('INSERT INTO message SET login = ?, user = ?, message = ?', [message.user, message.recup, message.message], (err) => {
+			if (err) console.log(err)
+			io.socket.emit('newmsg', {
+				
+			})
+		})
+	})
 
 	socket.on('disconnect', function () {
 		if (!me) {
-			return false;
+			return false
 		}
 		connect.query("UPDATE user SET online = 0 WHERE login = ?", [me], (err) => {
 			if (err) threw (err)
 		})
-  	});
-});
+  	})
+})
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

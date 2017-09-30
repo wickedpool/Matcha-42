@@ -4,29 +4,45 @@
 	<h2 class="ui right floated header"><%= talkto %>'s conversation</h2>
 	<br>
 	<hr>
-	<div class="ui comments">
-		<div class="comment">
-			<a class="avatar">
-				<img src="/images/profil/elliot.jpg">
-			</a>
-			<div class="content">
-				<a class="author">Joe Henderson</a>
-				<div class="metadata">
-					<div class="date">1 day ago</div>
+	<div id="messages">
+		<div class="ui comments" id="msgtpl" style="display:none">
+			<div class="comment">
+				<div class="content">
+					<a class="author"><%= message.user %></a>
+					<div class="metadata">
+						<div class="date"><%= h %> : <%= m %></div>
+					</div>
+					<hr>
+					<div class="text">
+						<%= message %>
+					</div>
 				</div>
-				<hr>
-				<div class="text">
-					<p>The hours, minutes and seconds stand as visible reminders that your effort put them all there. </p>
-					<p>Preserve until your next run, when the watch lets you see how Impermanent your efforts are.</p>
-				</div>
+
 			</div>
+			<br>
 		</div>
-		<br>
 	</div>
 	<form action="" id="formsg" class="ui form">
-		<input type="text" class="message" maxlength="160" class="text"/>
+		<input type="text" class="message" id="message" maxlength="160" class="text"/>
+		<input type="hidden" id="recup" value="<%=talkto %>" class="text"/>
 		<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
 	</form>
 </div>
 
 <% include footer %>
+
+<script>
+	 $('#formsg').submit(function(event) {
+	 	event.preventDefault()
+		console.log('======================')
+		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val() })
+		$('#message').val('')
+		$('#recup').val('')
+		$('#message').focus()
+	 })
+
+	 socket.on('newmsg', (function(message){
+	 	$('#messages').append('<div class="message">' + ejs.render(msgtpl, message) + '</div>');
+		$('#messages').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
+	 }))
+</script>
