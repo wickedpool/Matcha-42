@@ -89,9 +89,10 @@ router.post('/', function(req, res) {
 			req.session.error = "Vous etes trop jeune"
 			res.redirect('/')
 		} else {
+			var datarand = "t" + Math.random(555, 9560)
 			connect.query('INSERT INTO popularity SET login = ?, famous = 5', [login], (err, rows, result) => {
 				if (err) console.log(err)
-				connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?, interest = ?', [login, name, lastname, email, hash, new Date(), age, gender, city, interest], (err, rows, result) => {
+				connect.query('INSERT INTO user SET login = ?, name = ?, lastname = ?, email = ?, passwd = ?, register = ?, age = ?, sexe = ?, city = ?, interest = ?, hash = ?', [login, name, lastname, email, hash, new Date(), age, gender, city, interest, datarand], (err, rows, result) => {
 					if (err) {
 						console.log(err)
 						req.session.error = 'Une erreur est survenue. :)'

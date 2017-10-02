@@ -36,7 +36,7 @@ console.log('Database changed !');
 //Filling database
 
 //		USERS
-connection.query('CREATE TABLE IF NOT EXISTS user (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, name VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, email VARCHAR(255) NOT NULL, passwd VARCHAR(255) NOT NULL, register DATETIME, age INT(3), sexe VARCHAR(25), city VARCHAR(255), description VARCHAR(10000), interest VARCHAR(255), mainpic VARCHAR(255), pic1 VARCHAR(255), pic2 VARCHAR(255), pic3 VARCHAR(255), pic4 VARCHAR(255), online BOOLEAN DEFAULT FALSE, latitude FLOAT, longitude FLOAT)', function(err) {
+connection.query('CREATE TABLE IF NOT EXISTS user (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, name VARCHAR(100) NOT NULL, lastname VARCHAR(100) NOT NULL, email VARCHAR(255) NOT NULL, passwd VARCHAR(255) NOT NULL, register DATETIME, age INT(3), sexe VARCHAR(25), city VARCHAR(255), description VARCHAR(10000), interest VARCHAR(255), mainpic VARCHAR(255), pic1 VARCHAR(255), pic2 VARCHAR(255), pic3 VARCHAR(255), pic4 VARCHAR(255), online BOOLEAN DEFAULT FALSE, latitude FLOAT, longitude FLOAT, hash VARCHAR(255))', function(err) {
 	if (err) throw err;
 	else {
 		console.log('Table user created !');
@@ -95,7 +95,7 @@ connection.query('CREATE TABLE IF NOT EXISTS message (id INT(9) UNSIGNED AUTO_IN
 //
 // wickedpool
 //
-connection.query('INSERT INTO user SET login = "wickedpool", name = "Thomas", lastname = "Giraud", email = "thomasgirauddu73@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "19", sexe = "male", city = "Paris", description = "Oklm thomas du 73 rpz", interest = "female", mainpic = "medium_thgiraud.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "wickedpool", name = "Thomas", lastname = "Giraud", email = "thomasgirauddu73@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "19", sexe = "male", city = "Paris", description = "Oklm thomas du 73 rpz", interest = "female", mainpic = "medium_thgiraud.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$vtRrqaG87MzU8E3KVe9Zyusj9rnttR2DsRAeUlyibncE6aE75BIui"');
 connection.query('INSERT INTO tag SET login = "wickedpool", tag = "oklm"');
 connection.query('INSERT INTO tag SET login = "wickedpool", tag = "easy"');
 connection.query('INSERT INTO tag SET login = "wickedpool", tag = "alcool"');
@@ -104,7 +104,7 @@ console.log('User wickedpool created !');
 //
 // glouyot
 //
-connection.query('INSERT INTO user SET login = "glouyot", name = "Guillaume", lastname = "Louyot", email = "glouyot@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "25", sexe = "male", city = "Paris", description = "Glouyot 42 rpz la mif", interest = "female", mainpic = "glouyot.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "glouyot", name = "Guillaume", lastname = "Louyot", email = "glouyot@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "25", sexe = "male", city = "Paris", description = "Glouyot 42 rpz la mif", interest = "female", mainpic = "glouyot.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$ur8En9Y6Xn2YRpVL/UOy0.8YJqGI6X.m344JvaVInCdPYSOsdWrF."');
 connection.query('INSERT INTO tag SET login = "glouyot", tag = "hey"');
 connection.query('INSERT INTO tag SET login = "glouyot", tag = "lutins"');
 connection.query('INSERT INTO tag SET login = "glouyot", tag = "alcool"');
@@ -113,7 +113,7 @@ console.log('User glouyot created !');
 //
 // jorobin
 //
-connection.query('INSERT INTO user SET login = "jorobin", name = "Josephine", lastname = "Robin", email = "jorobin@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", mainpic = "jorobin.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "jorobin", name = "Josephine", lastname = "Robin", email = "jorobin@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", mainpic = "jorobin.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$xpT3mtk//0W2cDKC7xUPkuMpg3Gw6c/cwGNP6HGR4hbaNfXJSuZAm"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "hey"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyo"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyi"');
@@ -122,7 +122,7 @@ console.log('User jorobin created !');
 //
 // cuzureau
 //
-connection.query('INSERT INTO user SET login = "cuzureau", name = "Christophe", lastname = "Uzureau", email = "cuzureau@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "27", sexe = "male", city = "Paris", description = "Coucoucou moi c cuzureau", interest = "female", mainpic = "cuzureau.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "cuzureau", name = "Christophe", lastname = "Uzureau", email = "cuzureau@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "27", sexe = "male", city = "Paris", description = "Coucoucou moi c cuzureau", interest = "female", mainpic = "cuzureau.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$l4AXqA94X/tl2McbMLtp6uRGOAnXag.Ckb6qYYNsNO0hgln6mvMNK"');
 connection.query('INSERT INTO tag SET login = "cuzureau", tag = "alcool"');
 connection.query('INSERT INTO tag SET login = "cuzureau", tag = "heyoo"');
 connection.query('INSERT INTO tag SET login = "cuzureau", tag = "cc"');
@@ -131,7 +131,7 @@ console.log('User cuzureau created !');
 //
 // mkantzer
 //
-connection.query('INSERT INTO user SET login = "mkantzer", name = "Manon", lastname = "Kantzer", email = "mkantzer@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", mainpic = "mkantzer.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "mkantzer", name = "Manon", lastname = "Kantzer", email = "mkantzer@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "female", city = "Paris", description = "Salut moi jsuis oklm", interest = "male", mainpic = "mkantzer.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$of7Y6mXCaN7qGmEEaZY/buP3CA9N0FkLBT7PkPn0XoaHRfLBGCpsG"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "hey"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyo"');
 connection.query('INSERT INTO tag SET login = "jorobin", tag = "heyi"');
@@ -140,7 +140,7 @@ console.log('User mkantzer created !');
 //
 // arive-de
 //
-connection.query('INSERT INTO user SET login = "arive-de", name = "Alix", lastname = "Rive-De", email = "arive-de@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "24", sexe = "female", city = "Paris", description = "Salut moi jsuis alix oklm", interest = "male", mainpic = "medium_arive-de.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "arive-de", name = "Alix", lastname = "Rive-De", email = "arive-de@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "24", sexe = "female", city = "Paris", description = "Salut moi jsuis alix oklm", interest = "male", mainpic = "medium_arive-de.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$AfXF2JY1FpwAzljjZI8j/emvQc4eBrqwhfJb79bmavVrdi5sFAdiG"');
 connection.query('INSERT INTO tag SET login = "arive-de", tag = "biit"');
 connection.query('INSERT INTO tag SET login = "arive-de", tag = "oklm"');
 connection.query('INSERT INTO tag SET login = "arive-de", tag = "joy"');
@@ -149,7 +149,7 @@ console.log('User arive-de created !');
 //
 // cfatrane
 //
-connection.query('INSERT INTO user SET login = "cfatrane", name = "Charles Edouard", lastname = "Fatrane", email = "cfatrane@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "male", city = "Paris", description = "Coucoucou moi c cfatraner en Y", interest = "female", mainpic = "cfatrane.jpg", latitude = "48.8965", longitude = "2.3182"');
+connection.query('INSERT INTO user SET login = "cfatrane", name = "Charles Edouard", lastname = "Fatrane", email = "cfatrane@gmail.com", passwd = "$2a$10$7ZelqP8zbBqsX91wyJ2NuOoDedtiwN5n9I4O6rCdc4gdyZw7oYMli", register = "2017-09-23 20:37:10", age = "21", sexe = "male", city = "Paris", description = "Coucoucou moi c cfatraner en Y", interest = "female", mainpic = "cfatrane.jpg", latitude = "48.8965", longitude = "2.3182", hash = "$2a$10$LKerxHiJg0tDOxZ39RXH3eaUJARYRGu6jHpYPWKSxMkUzk6dlbvI."');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "oklm"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "briquets"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "easy"');

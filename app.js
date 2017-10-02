@@ -7,6 +7,7 @@ var		express = require('express'),
 		cookieParser = require('cookie-parser'),
 	 	bodyParser = require('body-parser'),
 		server = require('http').createServer(app),
+		bcrypt = require('bcrypt'),
 		socketIOSession = require("socket.io.session")
 
 app.io = require('socket.io')(server)
@@ -31,6 +32,7 @@ var 	index = require('./routes/index'),
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
+
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
@@ -103,11 +105,13 @@ app.io.on('connection', function(socket){
 
 	socket.on('newmsg', function(message){
 		message.user = global.me
-		message.h = date.getHours(),
+		date = new Date();
+		message.h = date.getHours();
 		message.m = date.getMinutes();
 		connect.query('INSERT INTO message SET login = ?, new Date(), user = ?, message = ?', [message.user, message.recup, message.message], (err) => {
 			if (err) console.log(err)
-			io.socket.emit('newmsg', message);
+			console.log(message);
+			app.io.socket.emit('newmsg', message);
 		})
 	})
 

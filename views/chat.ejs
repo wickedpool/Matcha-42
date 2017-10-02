@@ -8,13 +8,12 @@
 		<div class="ui comments" id="msgtpl" style="display:none">
 			<div class="comment">
 				<div class="content">
-					<a class="author"><%= message.user %></a>
+					<a class="author"></a>
 					<div class="metadata">
-						<div class="date"><%= h %> : <%= m %></div>
+						<div class="date"></div>
 					</div>
 					<hr>
 					<div class="text">
-						<%= message %>
 					</div>
 				</div>
 
@@ -41,8 +40,8 @@
 		$('#message').focus()
 	 })
 
-	 socket.on('newmsg', (function(message){
-	 	$('#messages').append('<div class="message">' + ejs.render(msgtpl, message) + '</div>');
-		$('#messages').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
-	 }))
+	 //socket.on('newmsg', (function(message){
+	 //	$('#messages').append('<div class="message">' + ejs.render(msgtpl, message) + '</div>');
+	 //   $('#messages').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
+	 //}))
 </script>
