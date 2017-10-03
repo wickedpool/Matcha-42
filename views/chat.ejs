@@ -4,23 +4,48 @@
 	<h2 class="ui right floated header"><%= talkto %>'s conversation</h2>
 	<br>
 	<hr>
-	<div id="messages">
-		<div class="ui comments" id="msgtpl" style="display:none">
-			<div class="comment">
-				<div class="content">
-					<a class="author"></a>
-					<div class="metadata">
-						<div class="date"></div>
-					</div>
-					<hr>
-					<div class="text">
+	<% message.forEach(function(element) { %>
+		<% var name = element["login"] %>
+		<% var message = element["message"] %>
+		<% var date = element["sendat"] %>
+		<% if (name == talkto) { %>
+			<div id="messages">
+			<div class="ui comments" id="msgtpl">
+				<div class="comment">
+					<div class="content">
+						<a class="author"><%= talkto %></a>
+						<div class="metadata">
+							<div class="date"><%= date %></div>
+						</div>
+						<hr>
+						<div class="text">
+							<%= message %>
+						</div>
 					</div>
 				</div>
-
+				<br>
 			</div>
-			<br>
-		</div>
-	</div>
+			</div>
+		<% } else { %>
+			<div id="messages">
+			<div class="ui comments" id="msgtpl">
+				<div class="comment">
+					<div class="content">
+						<a class="author"><%= name %></a>
+						<div class="metadata">
+							<div class="date"><%= date %></div>
+						</div>
+						<hr>
+						<div class="text">
+							<%= message %>
+						</div>
+					</div>
+				</div>
+				<br>
+			</div>
+			</div>
+		<% } %>
+	<% }) %>
 	<form action="" id="formsg" class="ui form">
 		<input type="text" class="message" id="message" maxlength="160" class="text"/>
 		<input type="hidden" id="recup" value="<%=talkto %>" class="text"/>

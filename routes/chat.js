@@ -7,7 +7,12 @@ router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.params.id) {
 			var talkto = req.params.id
-			res.render('chat', { title: 'Express', talkto: talkto })
+			connect.query("SELECT * FROM message WHERE (login = ? AND user = ?) OR (login = ? AND user = ?) ORDER BY sendat ASC", [talkto, req.session.login, req.session.login, talkto], (err, rows, result) => {
+				if (err) console.log(err)
+				var message = rows
+				console.log(message)
+				res.render('chat', { title: 'Express', talkto: talkto, message: message })
+			})
 		} else {
 			req.session.error = 'Aucun user n\'est selectionne'
 			res.redirect('/message')

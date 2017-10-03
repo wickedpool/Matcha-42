@@ -104,14 +104,16 @@ app.io.on('connection', function(socket){
 	})
 
 	socket.on('newmsg', function(message){
+		if (message == '')
+			return false
 		message.user = global.me
 		date = new Date();
 		message.h = date.getHours();
 		message.m = date.getMinutes();
-		connect.query('INSERT INTO message SET login = ?, new Date(), user = ?, message = ?', [message.user, message.recup, message.message], (err) => {
+		connect.query('INSERT INTO message SET login = ?, sendat = ?, user = ?, message = ?', [message.user, date, message.recup, message.message], (err) => {
 			if (err) console.log(err)
 			console.log(message);
-			app.io.socket.emit('newmsg', message);
+			//app.io.socket.emit('newmsg', message);
 		})
 	})
 
