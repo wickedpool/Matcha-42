@@ -27,12 +27,12 @@ var 	index = require('./routes/index'),
 		edit = require('./routes/user_edit'),
 		message = require('./routes/message'),
 		chat = require('./routes/chat'),
-		user = require('./routes/user')
+		user = require('./routes/user'),
+		notif = require('./routes/notif')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
-
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')))
 app.use(logger('dev'))
@@ -90,6 +90,7 @@ app.use('/logout', logout)
 app.use('/user', user)
 app.use('/chat', chat)
 app.use('/message', message)
+app.use('/notif', notif)
 
 global.me = undefined
 
@@ -111,9 +112,12 @@ app.io.on('connection', function(socket){
 		message.h = date.getHours();
 		message.m = date.getMinutes();
 		connect.query('INSERT INTO message SET login = ?, sendat = ?, user = ?, message = ?', [message.user, date, message.recup, message.message], (err) => {
-			if (err) console.log(err)
-			console.log(message);
-			//app.io.socket.emit('newmsg', message);
+			var notifmsg = message.user + ' ' + message.recup + 'Vous a envoye un message'
+			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?', [message.user, date, "message", notifmsg], (err) => {
+				if (err) console.log(err)
+				console.log(message);
+				//app.io.socket.emit('newmsg', message);
+			})
 		})
 	})
 

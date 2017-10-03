@@ -28,7 +28,6 @@ router.get('/:id', function(req, res, next) {
 								connect.query("SELECT * FROM liked WHERE login = ? AND liked = ?", [login, req.session.login], (err3, rows3, res3) => {
 									if (err) console.log(err)
 									if (rows3[0] != undefined) {
-										console.log('chat going to be set')
 										req.session.chat = "ok"
 									}
 								})
@@ -55,6 +54,9 @@ router.post('/like', function(req, res, next) {
 		if (req.session.ok) {
 			connect.query("INSERT INTO liked set liked = ?, login = ?", [req.session.login2, req.session.login], (err) => {
 				if (err) console.log(err)
+				var notiflike = req.session.login + 'Vous a like'
+				connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "like", notiflike], (err) => {
+					if (err) console.log(err)
 				connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
 					connect.query("SELECT * FROM liked WHERE login = ? AND liked = ?", [req.session.login2, req.session.login], (err3, rows3, res3) => {
@@ -66,19 +68,28 @@ router.post('/like', function(req, res, next) {
 									if (err) console.log(err)
 									connect.query("UPDATE popularity SET famous = famous + 15 WHERE login = ?", [req.session.login], (err) => {
 										if (err) console.log(err)
+									var notifmatch = 'Vous avez match avec ' + req.session.login2
+									var notif2match = 'Vous avez match avec ' + req.session.login2
+									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login, new Date(), "match", notifmatch], (err) => {
+										if (err) console.log(err)
+									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "match", notif2match], (err) => {
+										if (err) console.log(err)
 										req.session.success = 'Vous avez like ' + req.session.login2
 										req.session.success = 'Vous avez match avec ' + req.session.login2
 										req.session.info = 'Vous pouvez maintenant parler avec ' + req.session.login2
 										req.session.chat = "ok"
 										res.redirect('/user/'+ req.session.login2)
 									})
+									})
 								})
+							})
 							})
 						} else {
 								req.session.success = 'Vous avez like ' + req.session.login2
 								res.redirect('/user/'+ req.session.login2)
 						}
 					})
+				})
 				})
 			})
 		} else {
@@ -94,9 +105,10 @@ router.post('/like', function(req, res, next) {
 router.post('/unlike', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.session.ok) {
-			console.log(req.session.login2)
-			console.log(req.session.login)
 			connect.query('DELETE FROM liked WHERE liked = ? AND login = ?', [req.session.login2, req.session.login], (err) => {
+				if (err) console.log(err)
+				var notifunlike = req.session.login + ' vous a unlike'
+			connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "unlike", notifunlike], (err) => {
 				if (err) console.log(err)
 				connect.query("UPDATE popularity SET famous = famous - 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
@@ -119,6 +131,7 @@ router.post('/unlike', function(req, res, next) {
 						}
 					})
 				})
+			})
 			})
 		} else {
 			req.session.error = 'Vous devez completer votre profil pour faire quoi que ce soit d\'autre'
