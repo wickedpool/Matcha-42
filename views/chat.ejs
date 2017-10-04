@@ -4,13 +4,14 @@
 	<h2 class="ui right floated header"><%= talkto %>'s conversation</h2>
 	<br>
 	<hr>
+	<div class="TEXTO">
 	<% message.forEach(function(element) { %>
 		<% var name = element["login"] %>
 		<% var message = element["message"] %>
 		<% var date = element["sendat"] %>
 		<% if (name == talkto) { %>
-			<div id="messages">
-			<div class="ui comments" id="msgtpl">
+			<div id="mesages">
+			<div class="ui comments" id="msgtpl" style="border: 14px solid grey;background: grey;border-radius: 10px;margin-bottom:3px">
 				<div class="comment">
 					<div class="content">
 						<a class="author"><%= talkto %></a>
@@ -27,8 +28,8 @@
 			</div>
 			</div>
 		<% } else { %>
-			<div id="messages">
-			<div class="ui comments" id="msgtpl">
+			<div id="messages" >
+			<div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;">
 				<div class="comment">
 					<div class="content">
 						<a class="author"><%= name %></a>
@@ -46,9 +47,11 @@
 			</div>
 		<% } %>
 	<% }) %>
+	</div>
 	<form action="" id="formsg" class="ui form">
 		<input type="text" class="message" id="message" maxlength="160" class="text"/>
 		<input type="hidden" id="recup" value="<%=talkto %>" class="text"/>
+		<input type="hidden" id="usr" value="<%=name %>" class="text"/>
 		<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
 	</form>
 </div>
@@ -61,12 +64,13 @@
 		console.log('======================')
 		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val() })
 		$('#message').val('')
-		$('#recup').val('')
 		$('#message').focus()
 	 })
 
-	 //socket.on('newmsg', (function(message){
-	 //	$('#messages').append('<div class="message">' + ejs.render(msgtpl, message) + '</div>');
-	 //   $('#messages').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
-	 //}))
+	 socket.on('newmsg', (function(message){
+	 		console.log($('#recup').val())
+			//if ((message.recup == $('#recup').val() && message.name == $('#usr').val()) || (message.recup == $('#usr').val() && message.name == $('#recup').val())) {
+			$('.TEXTO').append('<div id="messages"><div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;"><div class="comment"><div class="content"><a class="author">' + message.name + '</a><div class="metadata"><div class="date">'+ message.h + ' : ' + message.m + '</div></div><hr><div class="text">'+ message.message +'</div></div></div><br></div></div>');
+			$('.TEXTO').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);
+	 }))
 </script>
