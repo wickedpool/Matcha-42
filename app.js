@@ -115,7 +115,9 @@ app.io.on('connection', function(socket){
 			var notifmsg = message.user + ' ' + message.recup + 'Vous a envoye un message'
 			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?', [message.user, date, "message", notifmsg], (err) => {
 				if (err) console.log(err)
+				console.log("///////////////////////")
 				console.log(message);
+				console.log("///////////////////////")
 				socket.emit('newmsg', {
 					name: message.user,
 					message: message.message,

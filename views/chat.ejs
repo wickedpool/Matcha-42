@@ -32,7 +32,7 @@
 			<div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;">
 				<div class="comment">
 					<div class="content">
-						<a class="author"><%= name %></a>
+						<a class="author"><%= me %></a>
 						<div class="metadata">
 							<div class="date"><%= date %></div>
 						</div>
@@ -51,7 +51,7 @@
 	<form action="" id="formsg" class="ui form">
 		<input type="text" class="message" id="message" maxlength="160" class="text"/>
 		<input type="hidden" id="recup" value="<%=talkto %>" class="text"/>
-		<input type="hidden" id="usr" value="<%=name %>" class="text"/>
+		<input type="hidden" id="usr" value="<%=me %>" class="text"/>
 		<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
 	</form>
 </div>
@@ -62,7 +62,7 @@
 	 $('#formsg').submit(function(event) {
 	 	event.preventDefault()
 		console.log('======================')
-		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val() })
+		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val(), me: $('#usr'),val() })
 		$('#message').val('')
 		$('#message').focus()
 	 })

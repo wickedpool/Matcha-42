@@ -11,7 +11,7 @@ router.get('/:id', function(req, res, next) {
 				if (err) console.log(err)
 				var message = rows
 				console.log(message)
-				res.render('chat', { title: 'Express', talkto: talkto, message: message })
+				res.render('chat', { title: 'Express', me: req.session.login, talkto: talkto, message: message })
 			})
 		} else {
 			req.session.error = 'Aucun user n\'est selectionne'
