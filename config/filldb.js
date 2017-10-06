@@ -4,9 +4,8 @@ var mysql      = require('mysql');
 
 var connection = mysql.createConnection({
 	host     : 'localhost',
-	port	 : 3307,
+	port	 : 3306,
 	user     : 'root',
-	password : 'root',
 });
 
 //Catching errors
@@ -85,6 +84,14 @@ connection.query('CREATE TABLE IF NOT EXISTS notif (id INT(9) UNSIGNED AUTO_INCR
 
 //		MESSAGES
 connection.query('CREATE TABLE IF NOT EXISTS message (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, sendat DATETIME, user VARCHAR(100) NOT NULL, message VARCHAR(160) NOT NULL)', function(err) {
+	if (err) throw err;
+	else {
+		console.log('Table message created !');
+	}
+})
+
+//		BLOCK
+connection.query('CREATE TABLE IF NOT EXISTS blocked (id INT(9) UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL, login VARCHAR(100) NOT NULL, user VARCHAR(100) NOT NULL)', function(err) {
 	if (err) throw err;
 	else {
 		console.log('Table message created !');

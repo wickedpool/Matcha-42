@@ -4,6 +4,67 @@
 	<h2 class="ui right floated header">Vos notifications</h2>
 	<br>
 	<hr>
+	<div class="ui feed">
+		<% if (notif) { %>
+			<% notif.forEach(function(element) { %>
+				<% var login = element["login"] %>
+				<% var date = element["sendat"] %>
+				<% var type = element["type"] %>
+				<% var message = element["msg"] %>
+				<% if (type == "message") { %>
+					<div class="event">
+						<div class="label">
+							<i class="comment icon"></i>
+						</div>
+						<div class="content">
+							<div class="summary">
+								<%= message %>
+								<div class="date"><%= date %></div>
+							</div>
+						</div>
+					</div>
+				<% } else if (type == "like") { %>
+					<div class="event">
+						<div class="label">
+							<i class="thumbs up icon"></i>
+						</div>
+						<div class="content">
+							<div class="summary">
+								<%= message %>
+								<div class="date"><%= date %></div>
+							</div>
+						</div>
+					</div>
+				<% } else if (type == "match") { %>
+					<div class="event">
+						<div class="label">
+							<i class="heart icon"></i>
+						</div>
+						<div class="content">
+							<div class="summary">
+								<%= message %>
+								<div class="date"><%= date %></div>
+							</div>
+						</div>
+					</div>
+				<% } else { %>
+					<div class="event">
+						<div class="label">
+							<i class="thumbs down icon"></i>
+						</div>
+						<div class="content">
+							<div class="summary">
+								<%= message %>
+								<div class="date"><%= date %></div>
+							</div>
+						</div>
+					</div>
+				<% } %>
+			<% }) %>
+		<% } %>
+	</div>
+</div>
+		
 </div>
 
 <% include footer %>

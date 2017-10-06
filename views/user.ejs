@@ -71,17 +71,79 @@
 	</div>
 	</div>
 	<br>
+	<% if (login2 != mine) { %>
 	<hr style="width:100%">
 	<center style="margin-left:auto;margin-right:auto;display:block;">
 		<a href="/chat/<%= login2 %>">
-		<div class="ui vertical animated button" style="width:250%" tabindex="0">
+		<div class="ui vertical animated button" style="width:100%" tabindex="0">
 			<div class="hidden content">talk</div>
 			<div class="visible content">
 				 <i class="talk icon"></i>
 			</div>
 		</div>
 		</a>
+	<br>
+	<br>
+		<% if (blocked == "no") { %>
+			<a href="/block/<%= login2 %>">
+				<button class="negative ui button">Block user</button>
+			</a>
+		<% } else { %>
+			<a href="/unblock/<%= login2 %>">
+				<button class="postive ui button">UnBlock user</button>
+			</a>
+		<% } %>
+	<br>
+	<br>
+		<a href="/fake/<%= login2 %>">
+			<button class="negative ui button">Report as fake</button>
+		</a>
+	
+	<% } %>
+	<br>
+	<br>
 	</center>
+	<br>
+	<br>
+	<br>
+	<div class="ui four doubling cards">
+  <div class="card">
+    <div class="image">
+		<% if (!pic1) { %>
+			<img src="/images/profil/steve.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=pic1%>">
+		<% } %>
+    </div>
+  </div>
+  <div class="card">
+    <div class="image">
+		<% if (!pic2) { %>
+			<img src="/images/profil/steve.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=pic2%>">
+		<% } %>
+    </div>
+  </div>
+  <div class="card">
+    <div class="image">
+		<% if (!pic3) { %>
+			<img src="/images/profil/steve.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=pic3%>">
+		<% } %>
+    </div>
+  </div>
+  <div class="card">
+    <div class="image">
+		<% if (!pic4) { %>
+			<img src="/images/profil/steve.jpg">
+		<% } else { %>
+			<img src="/images/upload_images/<%=pic4%>">
+		<% } %>
+    </div>
+  </div>
+</div>	
 	<div class="ui segment textarea">
 	<div class="column">
 		<div class="ui form">

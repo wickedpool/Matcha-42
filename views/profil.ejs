@@ -9,7 +9,7 @@
   <div class="doubling three column row">
     <div class="column">
 		<div class="ui segment">
-			<form class="ui form segment" method="post" action="/profil/upload" enctype="multipart/form-data">
+			<form class="ui form segment" method="post" action="/profil/upload/1" enctype="multipart/form-data">
 				<% if (mainpic) { %>
                 	<img alt="User Pic" src="images/upload_images/<%=mainpic%>" class="ui medium circular image">	
 				<% } else { %>
@@ -104,6 +104,80 @@
 			
 	<br>
 	<hr style="width:100%">
+	<div class="ui four doubling cards">
+		<div class="ui segment">
+			<form <% if (!pic1) { %> class="ui form oklm" <% } else { %> class="ui form" <% } %> class="ui form" method="post" action="/profil/upload/2" enctype="multipart/form-data">
+			<div class="card">
+				<div class="image">
+					<% if (!pic1) { %>
+						<img style="width:50%" src="/images/profil/steve.jpg">
+					<% } else { %>
+						<img src="/images/upload_images/<%=pic1%>">
+					<% } %>
+				</div>
+			</div>
+			<input class="form-control" type="file" name="uploaded_image" accept=""/>
+			<hr>
+				<div class="ui center">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+				</div>
+			</form>
+		</div>
+		<div class="ui segment">
+			<form <% if (!pic2) { %> class="ui form oklm" <% } else { %> class="ui form" <% } %> method="post" action="/profil/upload/3" enctype="multipart/form-data">
+			<div class="card">
+				<div class="image">
+					<% if (!pic2) { %>
+						<img style="width:50%" src="/images/profil/steve.jpg">
+					<% } else { %>
+						<img src="/images/upload_images/<%=pic2%>">
+					<% } %>
+				</div>
+			</div>
+			<input class="form-control" type="file" name="uploaded_image" accept=""/>
+			<hr>
+				<div class="ui center">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+				</div>
+			</form>
+		</div>
+		<div class="ui segment">
+			<form <% if (!pic3) { %> class="ui form oklm" <% } else { %> class="ui form" <% } %> class="ui form" method="post" action="/profil/upload/4" enctype="multipart/form-data">
+			<div class="card">
+				<div class="image">
+					<% if (!pic3) { %>
+						<img style="width:50%" src="/images/profil/steve.jpg">
+					<% } else { %>
+						<img src="/images/upload_images/<%=pic3%>">
+					<% } %>
+				</div>
+			</div>
+			<input class="form-control" type="file" name="uploaded_image" accept=""/>
+			<hr>
+				<div class="ui center">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+				</div>
+			</form>
+		</div>
+		<div class="ui segment">
+			<form <% if (!pic4) { %> class="ui form oklm" <% } else { %> class="ui form" <% } %> class="ui form" method="post" action="/profil/upload/5" enctype="multipart/form-data">
+			<div class="card">
+				<div class="image">
+					<% if (!pic4) { %>
+						<img style="width:50%" src="/images/profil/steve.jpg">
+					<% } else { %>
+						<img src="/images/upload_images/<%=pic4%>">
+					<% } %>
+				</div>
+			</div>
+			<input class="form-control" type="file" name="uploaded_image" accept=""/>
+			<hr>
+				<div class="ui center">
+					<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
+				</div>
+			</form>
+		</div>
+	</div>
 	<div class="ui segment textarea">
 	<div class="column">
 	<form class="ui form segment" method="post" action="/profil/des">

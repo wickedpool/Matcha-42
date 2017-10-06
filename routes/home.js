@@ -6,6 +6,24 @@ var express = require('express'),
 router.get('/', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.session.ok) {
+			connect.query("SELECT login FROM blocked WHERE user = ?", [req.session.login], (err, rows0, result) => {
+				if (err) console.log(err)
+				if (rows0[0] != undefined) {
+					var skip = rows0[0].login
+					if (rows0[1] != undefined)
+						var skip1 = rows0[1].login
+					else
+						var skip1 = "non"
+					if (rows0[2] != undefined)
+						var skip2 = rows0[2].login
+					else
+						var skip2 = "non"
+				} else {
+					var skip = "non"
+					var skip1 = "non"
+					var skip2 = "non"
+				}
+			console.log(skip)
 			var login = req.session.login,
 				sexe = req.session.sexe,
 				age = req.session.age,
@@ -20,41 +38,41 @@ router.get('/', function(req, res, next) {
 						connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL AND (interest = ? OR interest = ?)", ["female", city, login, "male", "both"], (err, rows, result) => {
 							if (err) console.log(err)
 							var profile = rows
-							res.render('home', { title: 'Express', profile: profile })
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
 					} else if (interest == "male" && sexe == "female") {
 						connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL AND (interest = ? OR interest = ?)", ["male", city, login, "female", "both"], (err, rows, result) => {
 							if (err) console.log(err)
 							var profile = rows
-							res.render('home', { title: 'Express', profile: profile })
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
 
 					} else if (interest == "both" && sexe == "male") {
 						connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE sexe = ? AND city = ? AND login != ? AND mainpic IS NOT NULL AND interest = ?", ["male", city, login, "female"], (err, rows, result) => {
 							if (err) console.log(err)
 							var profile = rows
-							res.render('home', { title: 'Express', profile: profile })
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
 
 					} else if (interest == "both" && sexe == "female") {
 						connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE city = ? AND login != ? AND mainpic IS NOT NULL AND interest = ?", [city, login, "female"], (err, rows, result) => {
 							if (err) console.log(err)
 							var profile = rows
-							res.render('home', { title: 'Express', profile: profile })
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
 					} else {
 						connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE city = ? AND login != ? AND mainpic IS NOT NULL", [city, login], (err, rows, result) => {
 							if (err) console.log(err)
 							var profile = rows
-							res.render('home', { title: 'Express', profile: profile })
+							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
 
 					}
 				} else {
-					console.log('============')
 					var profile = undefined
 					res.render('home', { title: 'Express', profile: profile})
 				}
+			})
 			})
 		} else {
 			req.session.error = 'Vous devez completer votre profil pour aller sur cette page.'

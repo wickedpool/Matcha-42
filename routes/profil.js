@@ -30,12 +30,13 @@ router.get('/', function(req, res, next) {
 				if (err) console.log(err)
 				connect.query("SELECT mainpic FROM user WHERE login = ?", [req.session.login], (err, rows2, result) => {
 					if (err) console.log(err)
-					console.log(rows2)
-					console.log(rows2[0].mainpic)
+					connect.query("SELECT pic1, pic2, pic3, pic4 FROM user WHERE login = ?", [req.session.login], (err, rows3, result) => {
+					console.log(rows3)
 					if (rows2)
-						res.render('profil', { descri: rows1[0].description, mainpic: rows2[0].mainpic})
+						res.render('profil', { descri: rows1[0].description, mainpic: rows2[0].mainpic, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4})
 					else
 						res.render('profil', { descri: rows1[0].description})
+				})
 				})
 			})
 		})
@@ -102,33 +103,66 @@ router.post('/des', function(req, res, next) {
 	}
 })
 
-router.post('/upload', function(req, res, next) {
+router.post('/upload/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
-		console.log(req.files)
-		if (!req.files) {
-			req.session.error = 'Pas d\'image d\'upload'
-			res.redirect('/profil')
-		} else {
-			var file = req.files.uploaded_image
-			var img_name = file.name
-
-			if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png") {
-				file.mv('public/images/upload_images/'+file.name, function(err) {
-					if (err) {
-						req.session.error = 'Une erreur est survenue'
-						res.redirect('/profil')
-					}
-					connect.query("UPDATE user SET mainpic = ? WHERE login = ?", [img_name, req.session.login], (err) => {
-						if (err) console.log(err)
-						req.session.success = "Votre image a bien ete upload"
-						res.redirect('/profil')
-					})
-				})
-			} else {
-				req.session.error = 'Le format ne correspond pas'
-				req.session.info = "Les formats pris en compte sont: .png, .jpg"
+		if (req.params.id == 1 || req.params.id == 2 || req.params.id == 3 || req.params.id == 4 || req.params.id == 5) {
+			if (!req.files) {
+				req.session.error = 'Pas d\'image d\'upload'
 				res.redirect('/profil')
+			} else {
+				var file = req.files.uploaded_image
+				var img_name = file.name
+
+				if(file.mimetype == "image/jpeg" ||file.mimetype == "image/png") {
+					file.mv('public/images/upload_images/'+file.name, function(err) {
+						if (err) {
+							req.session.error = 'Une erreur est survenue'
+							res.redirect('/profil')
+						}
+						if (req.params.id == 1) {
+							connect.query("UPDATE user SET mainpic = ? WHERE login = ?", [img_name, req.session.login], (err) => {
+								if (err) console.log(err)
+								req.session.success = "Votre image a bien ete upload"
+								res.redirect('/profil')
+							})
+						} else if (req.params.id == 2) {
+							connect.query("UPDATE user SET pic1 = ? WHERE login = ?", [img_name, req.session.login], (err) => {
+								if (err) console.log(err)
+								req.session.success = "Votre image a bien ete upload"
+								res.redirect('/profil')
+							})
+						} else if (req.params.id == 3) {
+							connect.query("UPDATE user SET pic2 = ? WHERE login = ?", [img_name, req.session.login], (err) => {
+								if (err) console.log(err)
+								req.session.success = "Votre image a bien ete upload"
+								res.redirect('/profil')
+							})
+						} else if (req.params.id == 4) {
+							connect.query("UPDATE user SET pic3 = ? WHERE login = ?", [img_name, req.session.login], (err) => {
+								if (err) console.log(err)
+								req.session.success = "Votre image a bien ete upload"
+								res.redirect('/profil')
+							})
+						} else if (req.params.id == 5) {
+							connect.query("UPDATE user SET pic4 = ? WHERE login = ?", [img_name, req.session.login], (err) => {
+								if (err) console.log(err)
+								req.session.success = "Votre image a bien ete upload"
+								res.redirect('/profil')
+							})
+						} else {
+							req.session.error = 'Un probleme est survenu!'
+							res.redirect('/profil')
+						}
+					})
+				} else {
+					req.session.error = 'Le format ne correspond pas'
+					req.session.info = "Les formats pris en compte sont: .png, .jpg"
+					res.redirect('/profil')
+				}
 			}
+		} else {
+			req.session.error = 'Un probleme est survenu'
+			res.redirect('/profil')
 		}
 	} else {
 		req.session.error = 'Vous devez vous connecter pour acceder a cette page'

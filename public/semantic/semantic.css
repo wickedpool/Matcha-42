@@ -26658,7 +26658,7 @@ a.ui.card:hover,
   background: none;
   border: none;
   border-radius: none;
-  color: rgba(0, 0, 0, 0.6);
+  color: white;
 }
 
 .ui.feed > .event > .label img {
@@ -26720,7 +26720,7 @@ a.ui.card:hover,
   margin: 0em;
   font-size: 1em;
   font-weight: bold;
-  color: rgba(0, 0, 0, 0.87);
+  color: white;
 }
 
 /* Summary Image */

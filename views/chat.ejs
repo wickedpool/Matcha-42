@@ -62,7 +62,7 @@
 	 $('#formsg').submit(function(event) {
 	 	event.preventDefault()
 		console.log('======================')
-		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val(), me: $('#usr'),val() })
+		socket.emit('newmsg', {message: $('#message').val(), recup: $('#recup').val(), moi: $('#usr').val() })
 		$('#message').val('')
 		$('#message').focus()
 	 })

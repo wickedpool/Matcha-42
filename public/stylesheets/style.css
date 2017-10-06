@@ -125,6 +125,10 @@ div.ui.teal.empty.circular.label {
 	background: green
 }
 
+form.ui.form.oklm {
+	width: 50%;
+}
+
 /* edit */
 
 div.ui.grid.edit {
@@ -170,3 +174,15 @@ div.item.oklm:hover {
     margin-top: 4%;
 	color: white;
 }
+
+/* NOTIFS */
+
+.summary {
+	color:white;
+}
+
+.event:hover {
+	opacity: 0.8;
+	border-bottom: 1px solid white;
+}
+

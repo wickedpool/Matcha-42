@@ -28,6 +28,9 @@ var 	index = require('./routes/index'),
 		message = require('./routes/message'),
 		chat = require('./routes/chat'),
 		user = require('./routes/user'),
+		block = require('./routes/block'),
+		unblock = require('./routes/unblock'),
+		fake = require('./routes/fake'),
 		notif = require('./routes/notif')
 
 // view engine setup
@@ -91,8 +94,12 @@ app.use('/user', user)
 app.use('/chat', chat)
 app.use('/message', message)
 app.use('/notif', notif)
+app.use('/fake', fake)
+app.use('/block', block)
+app.use('/unblock', unblock)
 
 global.me = undefined
+var people = {}
 
 app.io.on('connection', function(socket){
 	console.log('a user connected')
@@ -112,12 +119,9 @@ app.io.on('connection', function(socket){
 		message.h = date.getHours();
 		message.m = date.getMinutes();
 		connect.query('INSERT INTO message SET login = ?, sendat = ?, user = ?, message = ?', [message.user, date, message.recup, message.message], (err) => {
-			var notifmsg = message.user + ' ' + message.recup + 'Vous a envoye un message'
+			var notifmsg = message.recup + 'Vous a envoye un message'
 			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?', [message.user, date, "message", notifmsg], (err) => {
 				if (err) console.log(err)
-				console.log("///////////////////////")
-				console.log(message);
-				console.log("///////////////////////")
 				socket.emit('newmsg', {
 					name: message.user,
 					message: message.message,
@@ -136,6 +140,7 @@ app.io.on('connection', function(socket){
 	})
 
 	socket.on('disconnect', function () {
+		console.log('disconnect')
 		if (!me) {
 			return false
 		}
