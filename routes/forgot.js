@@ -24,7 +24,7 @@ router.post('/', function(req, res, next) {
 						service: 'Gmail',
 						auth: {
 							user: 'giraudthomas38@gmail.com',
-							pass: 'rmpjvgyd'
+							pass: ''
 						}
 					})
 					var mailOptions = {
