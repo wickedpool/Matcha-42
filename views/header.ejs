@@ -47,12 +47,17 @@
 					<% } %>
 					<% if (locals && locals.login) { %>
 					<div class="right menu">
-						<a href="/message" class="item">
-  							<i class="talk icon"></i>
-						</a>
-						<a href="/notif" class="item">
-  							<i class="world icon"></i>
-						</a>
+						<% if (locals.ok) { %>
+							<a href="/message" class="item">
+								<i class="talk icon"></i>
+							</a>
+							<a href="/notif" class="item">
+								<i class="world icon"></i>
+							</a>
+							<a href="/search" class="item">
+								<i class="search icon"></i>
+							</a>
+						<% } %>
 						<% if (locals.mainpic) { %>
 						<a href='/profil' class="item"><img class="ui right spaced avatar image" src="/images/upload_images/<%=locals.mainpic%>"> <%= locals.login %> </a>
 						<% } else { %>

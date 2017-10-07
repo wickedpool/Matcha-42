@@ -4,12 +4,15 @@ var express = require('express'),
 	bcrypt = require('bcrypt'),
 	router = express.Router()
 
-
 router.get('/', function(req, res, next) {
 	res.render('login', { title: 'Express' })
 })
 
 router.post('/', function(req, res) {
+	if (req.session && req.session.login) {
+		req.session.error = "Vous ne pouvez plus aller sur cette page"
+		res.redirect('/home')
+	} else {
 	var login = req.body.login,
 		pswd = req.body.pswd
 	var RegexMin = /[a-z]/,
@@ -86,6 +89,7 @@ router.post('/', function(req, res) {
 	} else {
 		req.session.error = 'Veuillez remplir tous les champs.'
 		res.redirect('/login')
+	}
 	}
 })
 

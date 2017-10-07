@@ -19,12 +19,11 @@ router.post('/', function(req, res, next) {
 			if (rows[0] != undefined) {
 				var hash = rows[0].hash
 				var login = rows[0].login
-				console.log("SA VA MAILER SA MERE")
 					var smtpTransport = mailer.createTransport({
 						service: 'Gmail',
 						auth: {
-							user: 'giraudthomas38@gmail.com',
-							pass: ''
+							user: 'admmatcha@gmail.com',
+							pass: 'Apwn789123'
 						}
 					})
 					var mailOptions = {
@@ -40,7 +39,7 @@ router.post('/', function(req, res, next) {
 						if (err) console.log(err)
 						else {
 							req.session.success = "un email vous a ete envoye"
-							res.redirect('home')
+							res.redirect('/home')
 						}
 					})
 			} else {

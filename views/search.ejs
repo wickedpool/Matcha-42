@@ -1,3 +1,90 @@
 <% include header %>
 
+<div class="ui segment">
+	<h2 class="ui right floated header">Recherche</h2>
+	<br>
+	<hr>
+	<br>
+	<div class="ui form">
+		<form method="get" action="/search/tag">
+			<div class="fields">
+				<label>Entrez un tag</label>
+				<div class="two wide field">
+					<input name="tag" type="text" placeholder="#tag">
+				</div>
+				<div class="two wide field">
+					<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Rechercher">
+				</div>
+			</div>
+		</form>
+		<form method="post" action="/search">
+			<div class="fields">
+				<label>Age entre:</label>
+				<div class="one wide field">
+					<input type="text" placeholder="20">
+				</div>
+				<p>et</p>
+				<div class="one wide field">
+					<input type="text" placeholder="30">
+				</div>
+				<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Rechercher">
+			</div>
+		</form>
+		<form method="post" action="/search">
+			<div class="fields">
+				<label>Popularite entre:</label>
+				<div class="one wide field">
+					<input type="text" placeholder="10">
+				</div>
+				<p>et</p>
+				<div class="one wide field">
+					<input type="text" placeholder="300">
+				</div>
+				<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Rechercher">
+			</div>
+		</form>
+	</div>
+</div>
+<% if (profile != undefined) { %>
+	<% profile.forEach(function(element) { %>
+	<% var pic = element["mainpic"] %>
+	<% var name = element["name"] %>
+	<% var lname = element["lastname"] %>
+	<% var sexe = element["sexe"] %>
+	<% var age = element["age"] %>
+	<% var descri = element["description"] %>
+	<% var login = element["login"] %>
+	<% if (skip1 != login && skip2 != login && skip != login) { %>
+	<a href="/user/<%= login %>">
+		<div class="ui people shape">
+		<div class="sides">
+			<div class="side active">
+				<div class="ui card">
+					<div class="image">
+						<img src="/images/upload_images/<%= pic %>">
+					</div>
+					<div class="content">
+						<div class="header"><%= name %> <%= lname %></div>
+							<div class="meta">
+								<%= sexe %>, <%= age %> ans
+							</div>
+							<div class="description">
+								<%= descri %>
+							</div>
+						</div>
+						<div class="extra content">
+							<span class="right floated">
+							Joined in 2017
+							</span>
+							<span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	<% } %>
+	<% }) %>
+<% } %>
+
 <% include footer %>

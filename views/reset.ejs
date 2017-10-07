@@ -4,11 +4,21 @@
 	<h2 class="ui right floated header">Reset password</h2>
 	<br>
 	<hr>
-	<form action="/reset" class="ui form">
-		<input type="pswd" name="pswd" id="message" maxlength="160" class="text"/>
-		<input type="repswd" name="repwsd"/>
-		<input type="hidden" name="usr" value="<%=id %>" class="text"/>
-		<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
+		<form class="ui form segment" method="post" action="/reset">
+		<div class="fields">
+			<div class="field">
+				<label>Nouveau password</label>
+				<input type="password" name="pswd" id="message" maxlength="160" class="text"/>
+			</div>
+			<div class="field">
+				<label>Encore une fois</label>
+				<input type="password" name="repwsd"/>
+			</div>
+			<input type="hidden" name="usr" value="<%=id %>" class="text"/>
+			<div class="ui center">
+				<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
+			</div>
+		</div>
 	</form>
 </div>
 
