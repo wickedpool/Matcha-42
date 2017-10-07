@@ -19,8 +19,6 @@ router.post('/', function(req, res) {
 		gender = req.body.gender,
 		city = req.body.city,
 		age = new AgeFromDateString(req.body.age).age
-		console.log(age)
-		console.log("'''''''''''''''''''''''''")
 		pswd = req.body.pswd,
 		repswd = req.body.repswd,
 		interest = req.body.interest

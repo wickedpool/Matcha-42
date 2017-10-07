@@ -31,6 +31,8 @@ var 	index = require('./routes/index'),
 		block = require('./routes/block'),
 		unblock = require('./routes/unblock'),
 		fake = require('./routes/fake'),
+		forgot = require('./routes/forgot'),
+		reset = require('./routes/reset'),
 		notif = require('./routes/notif')
 
 // view engine setup
@@ -95,7 +97,9 @@ app.use('/chat', chat)
 app.use('/message', message)
 app.use('/notif', notif)
 app.use('/fake', fake)
+app.use('/forgot', forgot)
 app.use('/block', block)
+app.use('/reset', reset)
 app.use('/unblock', unblock)
 
 global.me = undefined

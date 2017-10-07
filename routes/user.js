@@ -47,7 +47,11 @@ router.get('/:id', function(req, res, next) {
 								} else {
 									var blocked = "no"
 								}
-							res.render('user', { title: 'Express', UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.login, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4, blocked: blocked })
+								connect.query("SELECT famous FROM popularity WHERE login = ?", [login], (err, rows, result) => {
+									if (err) console.log(err)
+									var famous = rows[0].famous
+							res.render('user', { title: 'Express', UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.login, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4, blocked: blocked, famous: famous })
+								})
 								})
 							})
 							})

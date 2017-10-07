@@ -1,0 +1,15 @@
+<% include header %>
+
+<div class="ui segment">
+	<h2 class="ui right floated header">Reset password</h2>
+	<br>
+	<hr>
+	<form action="/reset" class="ui form">
+		<input type="pswd" name="pswd" id="message" maxlength="160" class="text"/>
+		<input type="repswd" name="repwsd"/>
+		<input type="hidden" name="usr" value="<%=id %>" class="text"/>
+		<input type="submit" class="ui primary submit button send" value="Envoyer" class="submit"/>
+	</form>
+</div>
+
+<% include footer %>
