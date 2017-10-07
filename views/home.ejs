@@ -7,14 +7,14 @@
 <br>
 <h5 class="ui horizontal header divider" style="color:white">
   <i class="bar chart icon" style="color:white"></i>
-  Filtrer par :
+  Trier par :
 </h5>
 
 <div class="center aligned">
 	<div class="field">
-		<a href="/home/tag">
-			<button type="submit" class="ui red button" style="display:block;margin:auto">
-				<i class="tag icon"></i> Tags
+		<a href="/search">
+			<button type="submit" class="ui button" style="display:block;margin:auto">
+				<i class="tag icon"></i> Recherche
 			</button>
 		</a>
 	</div>
@@ -55,7 +55,7 @@
 	<% var descri = element["description"] %>
 	<% var login = element["login"] %>
 	<% if (skip1 != login && skip2 != login && skip != login) { %>
-	<a href="user/<%= login %>">
+	<a href="/user/<%= login %>">
 		<div class="ui people shape">
 		<div class="sides">
 			<div class="side active">

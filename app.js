@@ -33,6 +33,7 @@ var 	index = require('./routes/index'),
 		fake = require('./routes/fake'),
 		forgot = require('./routes/forgot'),
 		reset = require('./routes/reset'),
+		search = require('./routes/search'),
 		notif = require('./routes/notif')
 
 // view engine setup
@@ -99,6 +100,7 @@ app.use('/notif', notif)
 app.use('/fake', fake)
 app.use('/forgot', forgot)
 app.use('/block', block)
+app.use('/search', search)
 app.use('/reset', reset)
 app.use('/unblock', unblock)
 
