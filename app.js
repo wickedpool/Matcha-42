@@ -104,43 +104,54 @@ app.use('/search', search)
 app.use('/reset', reset)
 app.use('/unblock', unblock)
 
-global.me = undefined
 var people = {}
-
 app.io.on('connection', function(socket){
 	console.log('a user connected')
-	var me = false
+	global.me = []
 	socket.on('log', function(user){
-		global.me = user.login
+		global.me.push({user:user.login, socket:socket})
 		connect.query("UPDATE user SET online = 1 WHERE login = ?", [global.me], (err) => {
 			if (err) threw (err)
+			people[global.me] = socket.id
 		})
 	})
-
+	console.log('====--=-----------=--====')
+	console.log('jorobin == ' + people["jorobin"])
+	console.log(socket.id)
+	console.log('wickedpool == ' + people["wickedpool"])
+	console.log('====--=-----------=--====')
 	socket.on('newmsg', function(message){
 		if (message == '')
 			return false
 		message.user = global.me
-		date = new Date();
-		message.h = date.getHours();
-		message.m = date.getMinutes();
-		connect.query('INSERT INTO message SET login = ?, sendat = ?, user = ?, message = ?', [message.user, date, message.recup, message.message], (err) => {
-			var notifmsg = message.recup + 'Vous a envoye un message'
+		date = new Date()
+		message.h = date.getHours()
+		message.m = date.getMinutes()
+		connect.query('INSERT INTO message SET login = ?, sendat = ?, user = ?, message = ?', [message.moi, date, message.recup, message.message], (err) => {
+			var notifmsg = message.recup + ' Vous a envoye un message'
 			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?', [message.user, date, "message", notifmsg], (err) => {
 				if (err) console.log(err)
-				socket.emit('newmsg', {
-					name: message.user,
+				console.log('====--=-----------=--====')
+				console.log(message)
+				console.log('====--=-----------=--====')
+				socket.send(people[message.moi]).emit('newmsg', {
+					name: message.moi,
 					message: message.message,
 					h: message.h,
 					m: message.m,
 					recup: message.recup
-				});
-				
+				})
+				socket.send(people[message.recup]).emit('hismsg', {
+					name: message.recup,
+					message: message.message,
+					h: message.h,
+					m: message.m,
+					recup: message.moi
+				})
 				//socket.broadcast.to(socket.id).emit('newmsg', {
 				//	name: message.user,
 				//	message: message.message,
-            	//});
-
+            	//})
 			})
 		})
 	})
@@ -155,6 +166,7 @@ app.io.on('connection', function(socket){
 		})
   	})
 })
+global.people = people
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

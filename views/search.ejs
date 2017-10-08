@@ -17,28 +17,39 @@
 				</div>
 			</div>
 		</form>
-		<form method="post" action="/search">
+		<form method="get" action="/search/city">
+			<div class="fields">
+				<label>Entrez une ville</label>
+				<div class="two wide field">
+					<input name="city" type="text" placeholder="City">
+				</div>
+				<div class="two wide field">
+					<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Rechercher">
+				</div>
+			</div>
+		</form>
+		<form method="get" action="/search/age">
 			<div class="fields">
 				<label>Age entre:</label>
 				<div class="one wide field">
-					<input type="text" placeholder="20">
+					<input name="min" type="text" placeholder="20">
 				</div>
 				<p>et</p>
 				<div class="one wide field">
-					<input type="text" placeholder="30">
+					<input name="max" type="text" placeholder="30">
 				</div>
 				<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Rechercher">
 			</div>
 		</form>
-		<form method="post" action="/search">
+		<form method="get" action="/search/famous">
 			<div class="fields">
 				<label>Popularite entre:</label>
 				<div class="one wide field">
-					<input type="text" placeholder="10">
+					<input name="fmin" type="text" placeholder="10">
 				</div>
 				<p>et</p>
 				<div class="one wide field">
-					<input type="text" placeholder="300">
+					<input name="fmax" type="text" placeholder="300">
 				</div>
 				<INPUT class="ui primary submit button" TYPE="submit" NAME="nom" VALUE="Rechercher">
 			</div>

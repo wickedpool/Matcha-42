@@ -3,6 +3,8 @@ var express = require('express'),
 	session = require('express-session'),
 	router = express.Router()
 
+var views
+
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.params.id) {
@@ -23,6 +25,7 @@ router.get('/:id', function(req, res, next) {
 								interest = rows[0].interest,
 								age = rows[0].age,
 								mainpic1 = rows[0].mainpic,
+								online = rows[0].online,
 								descri = rows[0].description
 							req.session.login2 = req.params.id
 							connect.query("SELECT * FROM liked WHERE login = ? AND liked = ?", [req.session.login, login], (err2, rows2, result2) => {
@@ -50,7 +53,14 @@ router.get('/:id', function(req, res, next) {
 								connect.query("SELECT famous FROM popularity WHERE login = ?", [login], (err, rows, result) => {
 									if (err) console.log(err)
 									var famous = rows[0].famous
-							res.render('user', { title: 'Express', UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.login, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4, blocked: blocked, famous: famous })
+									if (views != login && login != req.session.login) {
+										var msg = req.session.login + ' A visite votre profil'
+										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [login, new Date(), "views", msg], (err, rows, result) => {
+											if (err) console.log(err)
+											views = login
+										})
+									}
+									res.render('user', { title: 'Express', online: online, UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.login, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4, blocked: blocked, famous: famous })
 								})
 								})
 							})
