@@ -107,12 +107,11 @@ app.use('/unblock', unblock)
 var people = {}
 app.io.on('connection', function(socket){
 	console.log('a user connected')
-	global.me = []
+	var me = false
 	socket.on('log', function(user){
-		global.me.push({user:user.login, socket:socket})
-		connect.query("UPDATE user SET online = 1 WHERE login = ?", [global.me], (err) => {
+		connect.query("UPDATE user SET online = 1 WHERE login = ?", [user.login], (err) => {
 			if (err) threw (err)
-			people[global.me] = socket.id
+			people[user.login] = socket.id
 		})
 	})
 	console.log('====--=-----------=--====')
