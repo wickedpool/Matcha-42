@@ -24,6 +24,10 @@
 
 		<script>
 			var socket = io.connect();
+			$('#logged').submit(function(event){
+	socket.emit('log', {
+		login	: $('#login').val()
+	})
 		</script>
 	</body>
 
