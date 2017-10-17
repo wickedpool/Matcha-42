@@ -67,7 +67,7 @@
 		$('#message').focus()
 	 })
 
-	 socket.on('newmsg', (function(message){
+	 socket.on('newmsgs', (function(message){
 	 		console.log($('#recup').val())
 			$('.TEXTO').append('<div id="messages"><div class="ui comments" id="msgtpl" style="width:50%;border: 14px solid #2185d0;background:#2185d0;border-radius: 10px;margin-bottom:3px;"><div class="comment"><div class="content"><a class="author">' + message.name + '</a><div class="metadata"><div class="date">'+ message.h + ' : ' + message.m + '</div></div><hr><div class="text">'+ message.message +'</div></div></div><br></div></div>');
 			$('.TEXTO').animate({scrollTop : $('#messages').prop('scrollHeight') }, 500);

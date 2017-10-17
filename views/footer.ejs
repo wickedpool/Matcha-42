@@ -8,27 +8,34 @@
 
 		<script>
 			$("#menu-toggle").click(function(e) {
-				e.preventDefault();
-				$("#wrapper").toggleClass("toggled");
-			});
+				e.preventDefault()
+				$("#wrapper").toggleClass("toggled")
+			})
 
 			$(document).ready(function(){
 				$('.right.menu.open').on("click",function(e){
-					e.preventDefault();
-					$('.ui.vertical.menu').toggle();
-				});
+					e.preventDefault()
+					$('.ui.vertical.menu').toggle()
+				})
 
-				$('.ui.dropdown').dropdown();
-			});
+				$('.ui.dropdown').dropdown()
+			})
 		</script>
 
-		<script>
-			var socket = io.connect();
-			$('#logged').submit(function(event){
-	socket.emit('log', {
-		login	: $('#login').val()
-	})
-		</script>
+		<% if (!locals.log) { %>
+			<script>
+				var socket = "tchi"
+			</script>
+		<% } else  { %>
+			<script>
+				var socket = io.connect()
+				var parse = '<%- locals.login %>'
+				console.log("PARSE ============= " + parse)
+				socket.emit('parse', {
+					login	: parse
+				})
+			</script>
+		<% } %>
 	</body>
 
 </html>
