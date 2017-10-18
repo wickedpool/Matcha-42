@@ -1,5 +1,28 @@
 <% include header %>
+:wa
+:qa
 
+
+
+
+
+
+
+
+
+
+
+
+:qa
+<meta http-equiv="refresh" content="5;" url="/chat/<%= talkto %>" />
+<script>
+var message;
+if (global.localStorage.getItem('message') !== '') {
+	message = global.localStorage.getItem('message');
+} else {
+message = '';
+}
+</script>
 <div class="ui segment">
 	<h2 class="ui right floated header"><%= talkto %>'s conversation</h2>
 	<br>
@@ -59,6 +82,7 @@
 <% include footer %>
 
 <script>
+
 	 $('#formsg').submit(function(event) {
 	 	event.preventDefault()
 		console.log('======================')

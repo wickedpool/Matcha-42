@@ -12,6 +12,7 @@
 				<% var type = element["type"] %>
 				<% var message = element["msg"] %>
 				<% if (type == "message") { %>
+				<a href="/message">
 					<div class="event">
 						<div class="label">
 							<i class="comment icon"></i>
@@ -23,7 +24,9 @@
 							</div>
 						</div>
 					</div>
+				</a>
 				<% } else if (type == "like") { %>
+				<a href="/home">
 					<div class="event">
 						<div class="label">
 							<i class="thumbs up icon"></i>
@@ -35,7 +38,9 @@
 							</div>
 						</div>
 					</div>
+				</a>
 				<% } else if (type == "match") { %>
+				<a href="/home">
 					<div class="event">
 						<div class="label">
 							<i class="heart icon"></i>
@@ -47,7 +52,9 @@
 							</div>
 						</div>
 					</div>
+				</a>
 				<% } else if (type == "views") { %>
+				<a href="/notif">
 					<div class="event">
 						<div class="label">
 							<i class="newspaper icon"></i>
@@ -59,7 +66,9 @@
 							</div>
 						</div>
 					</div>
+				</a>
 				<% } else { %>
+				<a href="/notif">
 					<div class="event">
 						<div class="label">
 							<i class="thumbs down icon"></i>
@@ -71,6 +80,7 @@
 							</div>
 						</div>
 					</div>
+				</a>
 				<% } %>
 			<% }) %>
 		<% } %>

@@ -55,7 +55,7 @@ router.get('/:id', function(req, res, next) {
 									var famous = rows[0].famous
 									if (views != login && login != req.session.login) {
 										var msg = req.session.login + ' A visite votre profil'
-										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [login, new Date(), "views", msg], (err, rows, result) => {
+										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [login, new Date(), "views", msg], (err, rows, result) => {
 											if (err) console.log(err)
 											views = login
 										})
@@ -96,7 +96,7 @@ router.post('/like', function(req, res, next) {
 			connect.query("INSERT INTO liked set liked = ?, login = ?", [req.session.login2, req.session.login], (err) => {
 				if (err) console.log(err)
 				var notiflike = req.session.login + ' vous a like'
-				connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "like", notiflike], (err) => {
+				connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "like", notiflike], (err) => {
 					if (err) console.log(err)
 				connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
@@ -111,9 +111,9 @@ router.post('/like', function(req, res, next) {
 										if (err) console.log(err)
 									var notifmatch = 'Vous avez match avec ' + req.session.login2
 									var notif2match = 'Vous avez match avec ' + req.session.login
-									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login, new Date(), "match", notifmatch], (err) => {
+									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login, new Date(), "match", notifmatch], (err) => {
 										if (err) console.log(err)
-									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "match", notif2match], (err) => {
+									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "match", notif2match], (err) => {
 										if (err) console.log(err)
 										req.session.success = 'Vous avez like ' + req.session.login2
 										req.session.success = 'Vous avez match avec ' + req.session.login2
@@ -149,7 +149,7 @@ router.post('/unlike', function(req, res, next) {
 			connect.query('DELETE FROM liked WHERE liked = ? AND login = ?', [req.session.login2, req.session.login], (err) => {
 				if (err) console.log(err)
 				var notifunlike = req.session.login + ' vous a unlike'
-			connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "unlike", notifunlike], (err) => {
+			connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "unlike", notifunlike], (err) => {
 				if (err) console.log(err)
 				connect.query("UPDATE popularity SET famous = famous - 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
@@ -163,9 +163,9 @@ router.post('/unlike', function(req, res, next) {
 									if (err) console.log(err)
 									var notifunmatch = 'Vous avez unmatch avec ' + req.session.login2
 									var notifunmatch2 = 'Vous avez unmatch avec ' + req.session.login
-									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login, new Date(), "unmatch", notifunmatch], (err) => {
+									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login, new Date(), "unmatch", notifunmatch], (err) => {
 										if (err) console.log(err)
-										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?", [req.session.login2, new Date(), "unmatch", notifunmatch2], (err) => {
+										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "unmatch", notifunmatch2], (err) => {
 											if (err) console.log(err)
 											req.session.success = 'Vous avez unlike ' + req.session.login2
 											req.session.success = 'Vous avez unmatch ' + req.session.login2

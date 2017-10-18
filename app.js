@@ -84,15 +84,6 @@ app.use(function(req, res, next) {
 	res.locals.descri = req.session.descri
 	res.locals.mainpic = req.session.mainpic
 	res.locals.log = req.session.log
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
-	console.log(req.session.login)
   next()
 })
 
@@ -150,31 +141,20 @@ app.io.on('connection', function(socket){
 		message.m = date.getMinutes()
 		connect.query('INSERT INTO message SET login = ?, sendat = ?, user = ?, message = ?', [message.moi, date, message.recup, message.message], (err) => {
 			var notifmsg = message.recup + ' Vous a envoye un message'
-			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?', [message.moi, date, "message", notifmsg], (err) => {
+			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0', [message.moi, date, "message", notifmsg], (err) => {
 				if (err) console.log(err)
 				console.log('========================')
 				console.log(people[message.moi])
 				console.log(people[message.recup])
 				console.log(people)
 				console.log('========================')
-				///socket.send(people[message.moi]).emit('newmsgs', {
-				///	name: message.moi,
-				///	message: message.message,
-				///	h: message.h,
-				///	m: message.m,
-				///	recup: message.recup
-				///})
-				socket.emit(people[message.recup]).emit('hismsg', {
-					name: message.recup,
+				socket.send(people[message.moi]).emit('newmsgs', {
+					name: message.moi,
 					message: message.message,
 					h: message.h,
 					m: message.m,
-					recup: message.moi
+					recup: message.recup
 				})
-				//socket.broadcast.to(socket.id).emit('newmsg', {
-				//	name: message.user,
-				//	message: message.message,
-            	//})
 			})
 		})
 	})
