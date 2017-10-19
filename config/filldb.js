@@ -162,6 +162,17 @@ connection.query('INSERT INTO tag SET login = "cfatrane", tag = "briquets"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "easy"');
 connection.query('INSERT INTO tag SET login = "cfatrane", tag = "bites"');
 console.log('User cfatrane created !');
+//
+// POPULARITY
+//
+connection.query('INSERT INTO popularity SET login = "wickedpool", famous = 120')
+connection.query('INSERT INTO popularity SET login = "glouyot", famous = 60')
+connection.query('INSERT INTO popularity SET login = "jorobin", famous = 220')
+connection.query('INSERT INTO popularity SET login = "cuzureau", famous = 90')
+connection.query('INSERT INTO popularity SET login = "mkantzer", famous = 420')
+connection.query('INSERT INTO popularity SET login = "arive-de", famous = 160')
+connection.query('INSERT INTO popularity SET login = "cfatrane", famous = 110')
+console.log("table popularity filled")
 
 //End of connection
 connection.end();

@@ -94,6 +94,7 @@
 			<div class="ui center">
 				<INPUT class="fluid ui primary submit button" TYPE="submit" NAME="nom" VALUE=" Envoyer ">
             </div>
+			<div class="ui error message"></div>
 		</form>
 	</div>
 	<hr>
@@ -107,3 +108,114 @@
 <!-- wrapper -->
 
 <% include footer %>
+
+<script>
+	$('.ui.form')
+	.form({
+	fields: {
+		name: {
+			identifier: 'name',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your name'
+			  },
+			  {
+				type   : 'minLength[2]',
+				prompt : 'Your name is too short'
+			  }
+			]
+		},
+		gender: {
+			identifier: 'gender',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please select your Gender'
+			  }
+			]
+		},
+		lastname: {
+			identifier: 'lastname',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your lastname'
+			  }
+			]
+		},
+		email: {
+			identifier: 'email',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your email'
+			  }
+			]
+		},
+		login: {
+			identifier: 'login',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your login'
+			  }
+			]
+		},
+		city: {
+			identifier: 'city',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your city'
+			  }
+			]
+		},
+		pswd: {
+			identifier: 'pswd',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your password'
+			  },
+			  {
+				type   : 'minLength[8]',
+				prompt : 'Your password must contain at least 8 char'
+			  }
+			]
+		},
+		repswd: {
+			identifier: 'repswd',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your password again'
+			  },
+			  {
+				type   : 'minLength[8]',
+				prompt : 'Your password must contain at least 8 char'
+			  }
+			]
+		},
+		age: {
+			identifier: 'age',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your Birthdate'
+			  }
+			]
+		},
+		interest: {
+			identifier: 'interest',
+			rules: [
+			  {
+				type   : 'empty',
+				prompt : 'Please enter your Interests'
+			  }
+			]
+		},
+
+	}
+	});
+</script>

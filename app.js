@@ -84,6 +84,14 @@ app.use(function(req, res, next) {
 	res.locals.descri = req.session.descri
 	res.locals.mainpic = req.session.mainpic
 	res.locals.log = req.session.log
+	connect.query("SELECT readed FROM notif WHERE login = ? AND readed = 0 LIMIT 1", [req.session.login], (err, rows, result) => {
+		if (err) console.log(err)
+		if (rows[0] != undefined) {
+			res.locals.cheecked = true
+		} else {
+			res.locals.cheecked = undefined
+		}
+	})
   next()
 })
 
@@ -128,6 +136,10 @@ app.io.on('connection', function(socket){
 	console.log('=========2ndPEOPLE============')
 	console.log(people)
 
+	socket.on('notif', function() {
+		locals.cheecked = true
+	})
+
 	socket.on('newmsg', function(message){
 		if (message == '')
 			return false
@@ -169,6 +181,11 @@ app.io.on('connection', function(socket){
   	})
 })
 global.people = people
+global.io = app.io
+
+console.log("======================")
+console.log(global.io)
+console.log("======================")
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

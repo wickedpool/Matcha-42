@@ -53,7 +53,9 @@
 							</a>
 							<a href="/notif" class="item">
 								<i class="world icon"></i>
-								<div class="floating ui red label" style="top:10px;">!</div>
+								<% if (locals && locals.cheecked) { %>
+									<div class="floating ui red label" style="top:10px;">!</div>
+								<% } %>
 							</a>
 							<a href="/search" class="item">
 								<i class="search icon"></i>

@@ -5,6 +5,23 @@ var express = require('express'),
 
 var views
 
+console.log("======================")
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log(global.io)
+console.log("======================")
+
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.params.id) {
@@ -57,6 +74,7 @@ router.get('/:id', function(req, res, next) {
 										var msg = req.session.login + ' A visite votre profil'
 										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [login, new Date(), "views", msg], (err, rows, result) => {
 											if (err) console.log(err)
+											res.io.send(global.people[login]).emit('notif')
 											views = login
 										})
 									}
@@ -98,6 +116,7 @@ router.post('/like', function(req, res, next) {
 				var notiflike = req.session.login + ' vous a like'
 				connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "like", notiflike], (err) => {
 					if (err) console.log(err)
+					res.io.send(global.people[req.session.login2]).emit('notif')
 				connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
 					connect.query("SELECT * FROM liked WHERE login = ? AND liked = ?", [req.session.login2, req.session.login], (err3, rows3, res3) => {
@@ -112,9 +131,11 @@ router.post('/like', function(req, res, next) {
 									var notifmatch = 'Vous avez match avec ' + req.session.login2
 									var notif2match = 'Vous avez match avec ' + req.session.login
 									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login, new Date(), "match", notifmatch], (err) => {
+									res.io.send(global.people[req.session.login]).emit('notif')
 										if (err) console.log(err)
 									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "match", notif2match], (err) => {
 										if (err) console.log(err)
+										res.io.send(global.people[req.session.login2]).emit('notif')
 										req.session.success = 'Vous avez like ' + req.session.login2
 										req.session.success = 'Vous avez match avec ' + req.session.login2
 										req.session.info = 'Vous pouvez maintenant parler avec ' + req.session.login2
@@ -151,6 +172,7 @@ router.post('/unlike', function(req, res, next) {
 				var notifunlike = req.session.login + ' vous a unlike'
 			connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "unlike", notifunlike], (err) => {
 				if (err) console.log(err)
+				res.io.send(global.people[req.session.login2]).emit('notif')
 				connect.query("UPDATE popularity SET famous = famous - 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
 					res.locals.liked = undefined
@@ -165,7 +187,9 @@ router.post('/unlike', function(req, res, next) {
 									var notifunmatch2 = 'Vous avez unmatch avec ' + req.session.login
 									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login, new Date(), "unmatch", notifunmatch], (err) => {
 										if (err) console.log(err)
+										res.io.send(global.people[req.session.login]).emit('notif')
 										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "unmatch", notifunmatch2], (err) => {
+											res.io.send(global.people[req.session.login2]).emit('notif')
 											if (err) console.log(err)
 											req.session.success = 'Vous avez unlike ' + req.session.login2
 											req.session.success = 'Vous avez unmatch ' + req.session.login2
