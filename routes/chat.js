@@ -13,7 +13,6 @@ router.get('/:id', function(req, res, next) {
 					connect.query("SELECT * FROM message WHERE (login = ? AND user = ?) OR (login = ? AND user = ?) ORDER BY sendat ASC", [talkto, req.session.login, req.session.login, talkto], (err, rows, result) => {
 						if (err) console.log(err)
 						var message = rows
-						console.log(message)
 						res.render('chat', { title: 'Express', me: req.session.login, talkto: talkto, message: message })
 					})
 				} else {

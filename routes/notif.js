@@ -10,7 +10,6 @@ router.get('/', function(req, res, next) {
 				var notif = rows
 				connect.query("SELECT readed FROM notif WHERE login = ? LIMIT 1", [req.session.login], (err1, rows1, result1) => {
 					if (err1) console.log(err1)
-					console.log(rows1[0])
 					if (rows1[0] == undefined)
 						res.render('notif', { title: 'Express', notif: notif })
 					else
@@ -31,7 +30,6 @@ router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.params.id) {
 			connect.query("SELECT MAX(id) as max FROM notif", (err, rows, result) => {
-				console.log(rows[0].max)
 				if (req.params.id <= rows[0].max && req.params.id >= 0) {
 					connect.query("UPDATE notif SET readed = 1 WHERE login = ? AND id = ?", [req.session.login, req.params.id], (err) => {
 						if (err) console.log(err)

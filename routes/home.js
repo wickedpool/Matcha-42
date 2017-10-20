@@ -23,7 +23,6 @@ router.get('/', function(req, res, next) {
 					var skip1 = "non"
 					var skip2 = "non"
 				}
-			console.log(skip)
 			var login = req.session.login,
 				sexe = req.session.sexe,
 				age = req.session.age,
@@ -56,7 +55,6 @@ router.get('/', function(req, res, next) {
 					} else if (interest == "both" && sexe == "female") {
 						connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE city = ? AND login != ? AND mainpic IS NOT NULL AND interest = ?", [city, login, "female"], (err, rows, result) => {
 							if (err) console.log(err)
-							console.log(rows)
 							var profile = rows
 							res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2})
 						})
@@ -105,7 +103,6 @@ router.get('/tag', function(req, res, next) {
 					i++
 				}
 			}
-			console.log(rows)
 			res.redirect('/home')
 		})
 	} else {
@@ -134,7 +131,6 @@ router.get('/famous', function(req, res, next) {
 				var skip2 = "non"
 			}
 			connect.query("SELECT u.login, u.name, u.lastname, u.sexe, u.age, u.interest, u.description, u.mainpic FROM user u INNER JOIN popularity p ON u.login = p.login WHERE u.city = ? AND u.login != ? AND u.mainpic IS NOT NULL AND sexe = ? AND (INTEREST = ? OR INTEREST = ?) ORDER BY p.famous DESC", [req.session.city, req.session.login, req.session.interest, req.session.sexe, "both"], (err, rows, result) => {
-				console.log(rows[0])
 				if (rows[0] != undefined) {
 					var profile = rows
 					res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2 })
@@ -171,7 +167,6 @@ router.get('/age', function(req, res, next) {
 				var skip2 = "non"
 			}
 			connect.query("SELECT login, name, lastname, sexe, age, interest, description, mainpic FROM user WHERE city = ? AND login != ? AND mainpic IS NOT NULL AND sexe = ? AND (INTEREST = ? OR INTEREST = ?) ORDER BY age DESC", [req.session.city, req.session.login, req.session.interest, req.session.sexe, "both"], (err, rows, result) => {
-				console.log(rows[0])
 				if (rows[0] != undefined) {
 					var profile = rows
 					res.render('home', { title: 'Express', profile: profile, skip: skip, skip1: skip1, skip2: skip2 })

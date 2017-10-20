@@ -61,7 +61,7 @@ router.post('/', function(req, res) {
 						connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [login], (err) => {
 							if (err) console.log(err)
 						})
-						connect.query("UPDATE user SET online = 1 WHERE login = ?", [login], (err) => {
+						connect.query("UPDATE user SET online = 1, connect = ? WHERE login = ?", [new Date(), login], (err) => {
 							if (err) threw (err)
 						})
 						req.session.success = "Vous êtes maintenant connecté"
@@ -75,6 +75,10 @@ router.post('/', function(req, res) {
 						req.session.city = rows[0].city
 						req.session.age = rows[0].age
 						req.session.info = 'Veuillez remplir vos informations personnelles.'
+						connect.query("UPDATE user SET online = 1, connect = ? WHERE login = ?", [new Date(), login], (err) => {
+							if (err) threw (err)
+						})
+
 						req.session.success = "Vous êtes maintenant connecté"
 						req.session.log = true
 						res.redirect('/profil')

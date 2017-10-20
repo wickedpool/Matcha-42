@@ -11,7 +11,6 @@ router.get('/', function(req, res, next) {
 				connect.query("SELECT m.matched, u.mainpic FROM matched m INNER JOIN user u ON m.matched = u.login WHERE m.login = ?", [req.session.login], (err1, rows1, result1) => {
 					if (err) console.log(err)
 					var matched = rows1
-					console.log(matched)
  					res.render('message', { title: 'Express', matched: matched })
 				})
 			} else {

@@ -4,24 +4,6 @@ var express = require('express'),
 	router = express.Router()
 
 var views
-
-console.log("======================")
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log(global.io)
-console.log("======================")
-
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.params.id) {
@@ -43,6 +25,7 @@ router.get('/:id', function(req, res, next) {
 								age = rows[0].age,
 								mainpic1 = rows[0].mainpic,
 								online = rows[0].online,
+								connected = rows[0].connect,
 								descri = rows[0].description
 							req.session.login2 = req.params.id
 							connect.query("SELECT * FROM liked WHERE login = ? AND liked = ?", [req.session.login, login], (err2, rows2, result2) => {
@@ -74,11 +57,11 @@ router.get('/:id', function(req, res, next) {
 										var msg = req.session.login + ' A visite votre profil'
 										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [login, new Date(), "views", msg], (err, rows, result) => {
 											if (err) console.log(err)
-											res.io.send(global.people[login]).emit('notif')
+											res.io.to(global.people[login]).emit('notif')
 											views = login
 										})
 									}
-									res.render('user', { title: 'Express', online: online, UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.login, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4, blocked: blocked, famous: famous })
+									res.render('user', { title: 'Express', online: online, UserTag: UserTag, age: age, login2: login, name: name, lastname: lastname, sexe: sexe, interest: interest, mainpic1: mainpic1, descri: descri, mine: req.session.login, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4, blocked: blocked, famous: famous, connected: connected })
 								})
 								})
 							})
@@ -116,7 +99,7 @@ router.post('/like', function(req, res, next) {
 				var notiflike = req.session.login + ' vous a like'
 				connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "like", notiflike], (err) => {
 					if (err) console.log(err)
-					res.io.send(global.people[req.session.login2]).emit('notif')
+					res.io.to(global.people[req.session.login2]).emit('notif')
 				connect.query("UPDATE popularity SET famous = famous + 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
 					connect.query("SELECT * FROM liked WHERE login = ? AND liked = ?", [req.session.login2, req.session.login], (err3, rows3, res3) => {
@@ -131,11 +114,11 @@ router.post('/like', function(req, res, next) {
 									var notifmatch = 'Vous avez match avec ' + req.session.login2
 									var notif2match = 'Vous avez match avec ' + req.session.login
 									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login, new Date(), "match", notifmatch], (err) => {
-									res.io.send(global.people[req.session.login]).emit('notif')
+									res.io.to(global.people[req.session.login]).emit('notif')
 										if (err) console.log(err)
 									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "match", notif2match], (err) => {
 										if (err) console.log(err)
-										res.io.send(global.people[req.session.login2]).emit('notif')
+										res.io.to(global.people[req.session.login2]).emit('notif')
 										req.session.success = 'Vous avez like ' + req.session.login2
 										req.session.success = 'Vous avez match avec ' + req.session.login2
 										req.session.info = 'Vous pouvez maintenant parler avec ' + req.session.login2
@@ -172,7 +155,7 @@ router.post('/unlike', function(req, res, next) {
 				var notifunlike = req.session.login + ' vous a unlike'
 			connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "unlike", notifunlike], (err) => {
 				if (err) console.log(err)
-				res.io.send(global.people[req.session.login2]).emit('notif')
+				res.io.to(global.people[req.session.login2]).emit('notif')
 				connect.query("UPDATE popularity SET famous = famous - 5 WHERE login = ?", [req.session.login], (err) => {
 					if (err) console.log(err)
 					res.locals.liked = undefined
@@ -187,9 +170,9 @@ router.post('/unlike', function(req, res, next) {
 									var notifunmatch2 = 'Vous avez unmatch avec ' + req.session.login
 									connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login, new Date(), "unmatch", notifunmatch], (err) => {
 										if (err) console.log(err)
-										res.io.send(global.people[req.session.login]).emit('notif')
+										res.io.to(global.people[req.session.login]).emit('notif')
 										connect.query("INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0", [req.session.login2, new Date(), "unmatch", notifunmatch2], (err) => {
-											res.io.send(global.people[req.session.login2]).emit('notif')
+											res.io.to(global.people[req.session.login2]).emit('notif')
 											if (err) console.log(err)
 											req.session.success = 'Vous avez unlike ' + req.session.login2
 											req.session.success = 'Vous avez unmatch ' + req.session.login2

@@ -30,10 +30,14 @@
 			<script>
 				var socket = io.connect()
 				var parse = '<%- locals.login %>'
-				console.log("PARSE ============= " + parse)
 				socket.emit('parse', {
 					login	: parse
 				})
+
+				socket.on('notif', function() {
+					$('#testt').append("<div class='floating ui red label' style='top:10px;'>!</div>");
+				})
+
 			</script>
 		<% } %>
 	</body>

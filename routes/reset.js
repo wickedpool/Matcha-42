@@ -33,8 +33,6 @@ router.post('/', function(req, res, next) {
 		usr = req.body.usr
 	if (pswd && req) {
 		if (usr) {
-			console.log(req.body.usr)
-			console.log(req.body.pswd)
 			var	hash = bcrypt.hashSync(req.body.pswd, salt)
 			connect.query("UPDATE user SET passwd = ? WHERE id = ?", [hash, usr], (err) => {
 				if (err) console.log(err)

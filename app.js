@@ -74,6 +74,7 @@ app.use(function (req, res, next) {
 })
 
 app.use(function(req, res, next) {
+	res.io = app.io
 	res.locals.login = req.session.login
 	res.locals.sexe = req.session.sexe
 	res.locals.lastname = req.session.lastname
@@ -124,29 +125,13 @@ app.io.on('connection', function(socket){
 			people[user.login] = socket.id
 		})
 	})
-	console.log('==========1stPEOPLE==============')
-	console.log(people)
-
 	socket.on('parse', function(parse){
-		console.log('==========PARSE==============')
-		console.log(people)
 		people[parse.login] = socket.id
-	})
-
-	console.log('=========2ndPEOPLE============')
-	console.log(people)
-
-	socket.on('notif', function() {
-		locals.cheecked = true
 	})
 
 	socket.on('newmsg', function(message){
 		if (message == '')
 			return false
-		console.log('========================')
-		console.log(message.moi)
-		console.log(message.recup)
-		console.log('========================')
 		message.user = message.moi
 		date = new Date()
 		message.h = date.getHours()
@@ -155,11 +140,6 @@ app.io.on('connection', function(socket){
 			var notifmsg = message.recup + ' Vous a envoye un message'
 			connect.query('INSERT INTO notif SET login = ?, sendat = ?, type = ?, msg = ?, readed = 0', [message.moi, date, "message", notifmsg], (err) => {
 				if (err) console.log(err)
-				console.log('========================')
-				console.log(people[message.moi])
-				console.log(people[message.recup])
-				console.log(people)
-				console.log('========================')
 				socket.send(people[message.moi]).emit('newmsgs', {
 					name: message.moi,
 					message: message.message,
@@ -182,10 +162,6 @@ app.io.on('connection', function(socket){
 })
 global.people = people
 global.io = app.io
-
-console.log("======================")
-console.log(global.io)
-console.log("======================")
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

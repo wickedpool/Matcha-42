@@ -7,7 +7,6 @@ var express = require('express'),
 router.get('/:id', function(req, res, next) {
 	if (req.session && req.session.login) {
 		if (req.params.id) {
-			console.log("COUCOUUUUUUUUUUUUUUUUUUUUUUUUUUUU")
 		connect.query("INSERT INTO blocked SET login = ?, user = ?", [req.session.login, req.params.id], (err) => {
 			if (err) console.log(err)
 			connect.query("DELETE FROM message WHERE user = ? AND login = ?", [req.session.user, req.params.id], (err) => {

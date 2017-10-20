@@ -31,7 +31,6 @@ router.get('/', function(req, res, next) {
 				connect.query("SELECT mainpic FROM user WHERE login = ?", [req.session.login], (err, rows2, result) => {
 					if (err) console.log(err)
 					connect.query("SELECT pic1, pic2, pic3, pic4 FROM user WHERE login = ?", [req.session.login], (err, rows3, result) => {
-					console.log(rows3)
 					if (rows2)
 						res.render('profil', { descri: rows1[0].description, mainpic: rows2[0].mainpic, pic1: rows3[0].pic1, pic2: rows3[0].pic2, pic3: rows3[0].pic3, pic4: rows3[0].pic4})
 					else

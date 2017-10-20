@@ -36,8 +36,8 @@
 		<div class="ui segment">
 			<% if (online == 1) { %>
 				<div class="ui teal empty circular label"></div> En Ligne
-			<% } else {%>
-				<div class="ui red empty circular label"></div> Hors Ligne
+			<% } else { %>
+				<div class="ui red empty circular label"></div> Hors Ligne - last log : <%= connected %>
 			<% } %>
 			<hr class="ui">
 				<div class="ui large header" style="color:white"> <%= name + ' ' + lastname %> </div>
